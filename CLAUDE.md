@@ -74,6 +74,10 @@ acarreos-ayuda/
 ├── guia-material.html                # Guía Material (Flete): mapa (paso 1 listo, resto próximamente)
 ├── guia-asfaltico.html               # Guía Flete Asfáltico: UNA sola parada (crear vale) — proceso completo
 ├── guia-renta-pipa.html              # Guía Renta de Pipa: aún sin tutoriales (página puente)
+├── diagrama-material.html            # DIAGRAMA de funcionamiento (muestra un SVG de Mermaid)
+├── diagrama-renta-camion.html        # idem, renta de camión
+├── diagrama-renta-pipa.html          # idem, pipa
+├── diagrama-asfaltico.html           # idem, asfáltico
 ├── ayuda-renta-crear-vale.html       # Lección: Residente crea vale de renta
 ├── ayuda-material-crear-vale.html    # Lección: Residente crea vale de material
 ├── ayuda-asfaltico-crear-vale.html   # Lección: Residente crea vale asfáltico
@@ -82,7 +86,9 @@ acarreos-ayuda/
 │   ├── iconos.css                # GENERADO — fuente MDI recortada a los 54 iconos usados
 │   └── iconos.woff2              # GENERADO — la fuente en sí (4 KB)
 ├── herramientas/
-│   └── generar-iconos.py         # Regenera los dos archivos de arriba (NO se despliega)
+│   ├── generar-iconos.py         # Regenera los dos archivos de arriba (NO se despliega)
+│   ├── diagramas-mermaid.md      # CÓDIGO FUENTE de los 4 diagramas (Mermaid)
+│   └── limpiar-svg.py            # Quita la fuente de 81 KB que mermaid.live incrusta
 ├── .vercelignore                 # Excluye herramientas/ y CLAUDE.md del sitio público
 ├── .gitignore                    # Excluye .vercel/ y el caché de la fuente
 ├── js/
@@ -91,7 +97,7 @@ acarreos-ayuda/
 │   └── lupa.js                   # Amplía una imagen de ejemplo a pantalla completa
 ├── videos/                       # Clips .mp4 que graba el usuario (ver LEEME.txt)
 │   └── LEEME.txt                 # Nombres EXACTOS que deben tener los videos
-├── img/                          # (reservada) capturas/logo si hacen falta
+├── img/                          # Imágenes de ejemplo + los 4 diagrama-*.svg
 └── vercel.json                   # Config mínima
 ```
 
@@ -137,6 +143,56 @@ renta (el camión va a **descargar**) e `img/ciclo-material.jpg` en material (va
 `.boton-ampliar` para verse en grande con la lupa.
 Nota histórica: el nodo de viaje tuvo antes un camión animado (SVG `<animateMotion>`)
 y luego un diagrama de iconos + curvas punteadas; ambos se quitaron a pedido del usuario.
+
+### Diagramas = VISTA DE CONJUNTO (`diagrama-*.html`)
+
+Cada guía tiene, entre el `.intro` y el `<h2 class="ruta-titulo">`, un botón
+`.boton-diagrama` que lleva a su `diagrama-*.html`. Son **cuatro**, uno por botón
+de la portada.
+
+**Guía vs. diagrama — dos lecturas distintas, no mezclarlas.** La guía es una
+lista de paradas que se tocan una por una para **aprender** con video; el
+diagrama es el flujo completo, con sus bifurcaciones, para **entenderlo** de un
+vistazo (presentarlo, refrescar la memoria).
+
+#### El diagrama es un SVG hecho con Mermaid — NO se edita a mano
+
+Flujo de trabajo para cambiar un diagrama:
+
+1. Edita el código en **`herramientas/diagramas-mermaid.md`** (ahí están los 4,
+   en versión detallada y resumida).
+2. Pégalo en **https://mermaid.live** → **Actions → SVG**.
+3. Pásalo por el limpiador y déjalo en `img/` con su nombre definitivo:
+   ```
+   python herramientas/limpiar-svg.py ORIGEN.svg img/diagrama-material.svg
+   ```
+
+> ⚠️ **El paso 3 no es opcional.** mermaid.live incrusta la fuente completa
+> "Recursive Variable" en base64 dentro de cada SVG: **81 KB por archivo**, el
+> mismo bloque repetido en los 4. Serían ~325 KB de fuente duplicada en un sitio
+> que recortó sus iconos de 723 KB a 8.6 KB justo por la mala señal en obra.
+> `limpiar-svg.py` borra ese `@font-face`; el SVG ya declara `arial, sans-serif`
+> como respaldo, así que el texto se sigue viendo bien. Baja ~60 % (los 4 quedan
+> en 48–81 KB, **9–12 KB ya comprimidos** por Vercel).
+
+**Por qué SVG y no PNG:** vectorial, se ve nítido en el celular y proyectado en
+una pared, y pesa menos.
+
+**Cómo se muestra:** `<img class="diagrama-svg" data-ampliar="...">` dentro de un
+`.diagrama`. El `data-ampliar` lo conecta con **`js/lupa.js`** (el mismo
+componente de las fotos de ejemplo) para verlo a pantalla completa — en celular
+es imprescindible, un diagrama de flujo no se lee al ancho de un teléfono.
+
+**Las notas van como HTML fuera del SVG**, no dibujadas dentro: así se leen con
+lector de pantalla, se buscan con Ctrl+F y no obligan a ampliar la imagen para
+enterarse de lo importante. Entre ellas, **en los 4**, la del PDF: se comparte
+por WhatsApp y **el sindicato concilia con él en la página web** de verificación
+(el QR abre `web-acarreos.vercel.app/vale/{folio}` sin sesión y con los precios
+ocultos). En asfáltico se aclara que eso pasa en el **paso 4**, antes de
+imprimir. El **tutorial de esa página web está pendiente**.
+
+Estilos en `estilos.css` **sección 18** (`.boton-diagrama`, `.diagrama`,
+`.diagrama-svg`). Es corta a propósito: todo el acomodo lo hizo Mermaid.
 
 ---
 
@@ -378,6 +434,13 @@ Además así lo que se abre en local con doble clic es idéntico a producción.
 - [x] **Iconos auto-hospedados y recortados**: 723 KB (CDN) → 8.5 KB (−99 %), y ya
       no dependen de que jsDelivr responda. Ver sección "Iconos".
 - [x] **Repo en GitHub** (privado) **conectado a Vercel**: `git push` despliega solo.
+- [x] **4 diagramas de funcionamiento** (`diagrama-*.html`), uno por botón de la
+      portada. Son SVG de Mermaid; el código fuente vive en
+      `herramientas/diagramas-mermaid.md`. Incluyen la nota de que el sindicato
+      **concilia con el PDF en la página web**.
+- [ ] **Tutorial de la página web de verificación** (`web-acarreos.vercel.app`):
+      cómo el sindicato concilia ahí con el PDF/QR. Hoy solo se menciona como
+      nota en los 4 diagramas.
 - [ ] Enlazar el Centro de Ayuda desde la app móvil (`appAcarreos`).
 - [ ] Pendiente menor: favicon + `<meta name="description">` (hoy al compartir el
       link por WhatsApp sale sin ícono ni descripción).

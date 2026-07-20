@@ -1382,3 +1382,152 @@ img[data-ampliar] {
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.85rem;
 }
+
+
+/* ============================================================================
+   18) DIAGRAMA DE FUNCIONAMIENTO  (páginas diagrama-*.html)
+
+   QUÉ ES: la vista "de conjunto". Las guías (guia-*.html) enseñan el proceso
+   paso a paso, con video; el diagrama lo muestra COMPLETO en una sola imagen,
+   con sus bifurcaciones, para entenderlo de un vistazo.
+
+   EL DIAGRAMA ES UN SVG, no HTML. Se dibuja con Mermaid (el código fuente vive
+   en herramientas/diagramas-mermaid.md) y se exporta desde mermaid.live. Por
+   eso esta sección es corta: no hay que maquetar cajas ni flechas, solo colocar
+   una imagen. Todo el trabajo de acomodo lo hizo Mermaid.
+
+   ¿Por qué SVG y no PNG? Porque es vectorial: el mismo archivo se ve nítido en
+   un celular y proyectado en una pared, y pesa menos (~10 KB comprimido).
+   ---------------------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------------------
+   18.1) BOTÓN DE ACCESO  (va en cada guia-*.html, arriba del mapa)
+   ---------------------------------------------------------------------------- */
+
+/* Hermano menor de .menu__boton (sección 15): mismo lenguaje visual — barra de
+   color a la izquierda, icono en círculo, flecha a la derecha — pero más bajito,
+   porque aquí es un acceso secundario, no el protagonista de la página. */
+.boton-diagrama {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 6px solid var(--color-primary);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  text-decoration: none;
+  color: var(--color-text);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.boton-diagrama:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.boton-diagrama:focus-visible {
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 3px;
+}
+
+/* El círculo del icono. flex-shrink: 0 evita que se aplaste si el texto crece. */
+.boton-diagrama__icono {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--color-background);
+  font-size: 1.5rem;
+  color: var(--color-primary);
+}
+
+/* La columna del texto. flex: 1 empuja la flecha hasta la orilla derecha;
+   min-width: 0 permite que el texto largo corte en varias líneas (truco
+   necesario en flexbox, si no desborda la tarjeta). */
+.boton-diagrama__texto {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.boton-diagrama__titulo {
+  font-weight: 700;
+  color: var(--color-secondary);
+}
+
+.boton-diagrama__desc {
+  font-size: 0.9rem;
+  color: var(--color-text-soft);
+}
+
+.boton-diagrama__flecha {
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  color: var(--color-text-soft);
+}
+
+/* Un color por tipo de vale — los MISMOS que usa el menú de la portada, para
+   que el usuario reconozca "esto sigue siendo la sección naranja/azul/verde". */
+.boton-diagrama--material { border-left-color: var(--color-primary); }
+.boton-diagrama--material .boton-diagrama__icono { color: var(--color-primary); }
+
+.boton-diagrama--renta { border-left-color: var(--color-secondary); }
+.boton-diagrama--renta .boton-diagrama__icono { color: var(--color-secondary); }
+
+.boton-diagrama--pipa { border-left-color: var(--color-accent); }
+.boton-diagrama--pipa .boton-diagrama__icono { color: var(--color-accent); }
+
+.boton-diagrama--asfaltico { border-left-color: var(--color-text); }
+.boton-diagrama--asfaltico .boton-diagrama__icono { color: var(--color-text); }
+
+
+/* ----------------------------------------------------------------------------
+   18.2) LA IMAGEN DEL DIAGRAMA
+   ---------------------------------------------------------------------------- */
+
+/* El marco blanco donde vive el SVG. Le da el mismo aspecto de "tarjeta" que
+   tienen las demás piezas del sitio. */
+.diagrama {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radio);
+  padding: 18px;
+  box-shadow: var(--sombra);
+  text-align: center;
+}
+
+/* La imagen en sí.
+
+   `max-width: 100%` + `height: auto` es LA regla de las imágenes responsivas:
+   "nunca seas más ancha que tu contenedor, y al encogerte conserva tu
+   proporción". Sin ella, un diagrama ancho desbordaría la pantalla del celular
+   y aparecería una barra de scroll horizontal en toda la página.
+
+   El cursor de lupa lo pone sola la regla `img[data-ampliar]` de la sección 17;
+   aquí no hay que repetirlo. */
+.diagrama-svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Aviso bajo el diagrama para quien lo abra en celular. En una pantalla angosta
+   el SVG se encoge tanto que el texto de las cajas no se alcanza a leer: hay que
+   decirle que lo amplíe. */
+.diagrama__pista {
+  margin-top: 12px;
+  font-size: 0.88rem;
+  color: var(--color-text-soft);
+}
+
+.diagrama__pista .mdi {
+  color: var(--color-primary);
+}

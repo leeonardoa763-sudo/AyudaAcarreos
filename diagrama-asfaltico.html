@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!--
+  diagrama-asfaltico.html — DIAGRAMA DE FUNCIONAMIENTO de Flete Asfáltico.
+
+  Se llega aquí desde el botón "Diagrama de funcionamiento" de guia-asfaltico.html.
+
+  DIFERENCIA CON LA GUÍA: la guía enseña el proceso paso a paso, con video, para
+  APRENDER a usar la app. Este diagrama lo muestra completo y con sus
+  bifurcaciones, para ENTENDER cómo funciona de un vistazo.
+
+  EL DIAGRAMA ES UN SVG hecho con Mermaid. El código fuente que lo genera está
+  en herramientas/diagramas-mermaid.md: para cambiarlo se edita ese código, se
+  reexporta en https://mermaid.live y se pasa por herramientas/limpiar-svg.py
+  (que le quita los 81 KB de fuente que mermaid.live incrusta).
+  NO se edita el .svg a mano.
+-->
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diagrama — Flete Asfáltico — Ayuda Control de Acarreos</title>
+
+    <link rel="stylesheet" href="css/iconos.css" />
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+
+  <body>
+    <header class="encabezado">
+      <div class="contenedor">
+        <h1 class="encabezado__titulo">
+          <i class="mdi mdi-road-variant"></i> Diagrama — Flete Asfáltico
+        </h1>
+        <p class="encabezado__subtitulo">Acarreo de mezcla asfáltica</p>
+      </div>
+    </header>
+
+    <main class="principal">
+      <div class="contenedor">
+        <!-- Vuelve A SU GUÍA, no a la portada: el diagrama es un complemento
+             de la guía, no una sección aparte. -->
+        <a class="volver" href="guia-asfaltico.html">
+          <i class="mdi mdi-arrow-left"></i> Volver a la guía de asfáltico
+        </a>
+
+        <div class="intro">
+          <h2 class="intro__titulo">
+            <i class="mdi mdi-sitemap-outline"></i> El proceso completo
+          </h2>
+          <p>El proceso más corto de todos: <strong>no participa el checador</strong> y <strong>no hay ciclo de viajes</strong>. El residente hace todo seguido y el vale queda emitido de inmediato.</p>
+        </div>
+
+        <!-- EL DIAGRAMA ----------------------------------------------------
+             data-ampliar es lo que conecta con js/lupa.js: al tocar la imagen
+             (o el botón de abajo) se abre a pantalla completa. En celular es
+             imprescindible — un diagrama de flujo no se lee al ancho de un
+             teléfono. -->
+        <div class="diagrama">
+          <img
+            class="diagrama-svg"
+            src="img/diagrama-asfaltico.svg"
+            alt="Diagrama de funcionamiento del flete asfáltico: los cinco pasos del residente en una sola sesión y el modal obligatorio del ticket físico."
+            data-ampliar="img/diagrama-asfaltico.svg"
+            data-ampliar-alt="Diagrama de funcionamiento del flete asfáltico: los cinco pasos del residente en una sola sesión y el modal obligatorio del ticket físico."
+          />
+
+          <p class="diagrama__pista">
+            <i class="mdi mdi-magnify-plus-outline"></i>
+            ¿Se ve chico? Tócalo para verlo en grande.
+          </p>
+
+          <button
+            type="button"
+            class="boton-ampliar"
+            data-ampliar="img/diagrama-asfaltico.svg"
+            data-ampliar-alt="Diagrama de funcionamiento del flete asfáltico: los cinco pasos del residente en una sola sesión y el modal obligatorio del ticket físico."
+          >
+            <i class="mdi mdi-magnify-plus-outline"></i> Ver en grande
+          </button>
+        </div>
+
+        <!-- LAS NOTAS van como texto HTML, no dentro del SVG: así se pueden
+             leer con lector de pantalla, se buscan con Ctrl+F y no obligan a
+             ampliar la imagen para enterarse de lo importante. -->
+        <div class="intro" style="margin-top: 24px">
+          <h2 class="intro__titulo">
+            <i class="mdi mdi-alert"></i> Lo que hay que tener presente
+          </h2>
+
+          <div class="nota">
+              <i class="mdi mdi-file-pdf-box"></i>
+              <strong>El PDF y el QR.</strong> Aquí el PDF se comparte
+              <strong>en el paso 4</strong>, antes de imprimir. Se
+              <strong>manda por WhatsApp</strong> y
+              <strong>el sindicato concilia con él en la página web</strong> de
+              verificación. El QR la abre
+              <strong>sin necesidad de iniciar sesión</strong>, y los precios
+              quedan ocultos.
+              <br />
+              <em>El tutorial de la página web se agregará más adelante.</em>
+            </div>
+
+            <div class="nota nota--alerta">
+              <i class="mdi mdi-alert"></i>
+              <strong>El ticket físico es obligatorio.</strong> Su ventana no se
+              cierra hasta que imprimas o confirmes que no hay impresora. Sale
+              <strong>una copia a la vez</strong>: para la segunda, responde
+              <em>"No, reintentar"</em>.
+            </div>
+        </div>
+
+        <!-- Puente de regreso a la guía, para quien quiera el detalle en video. -->
+        <a class="boton-diagrama boton-diagrama--asfaltico" href="guia-asfaltico.html">
+          <span class="boton-diagrama__icono">
+            <i class="mdi mdi-play-circle"></i>
+          </span>
+          <span class="boton-diagrama__texto">
+            <span class="boton-diagrama__titulo">Ver los tutoriales paso a paso</span>
+            <span class="boton-diagrama__desc">Cada parada del proceso, con su video</span>
+          </span>
+          <i class="mdi mdi-chevron-right boton-diagrama__flecha"></i>
+        </a>
+      </div>
+    </main>
+
+    <footer class="pie">
+      <div class="contenedor">Control de Acarreos · Centro de Ayuda</div>
+    </footer>
+
+    <!-- LUPA: capa a pantalla completa. Es el mismo componente genérico que ya
+         usan las lecciones para las fotos de ejemplo. -->
+    <div class="lupa" id="lupa" hidden>
+      <button
+        type="button"
+        class="lupa__cerrar"
+        data-lupa-cerrar
+        aria-label="Cerrar la imagen ampliada"
+      >
+        &times;
+      </button>
+
+      <img class="lupa__img" id="lupa-img" src="" alt="" />
+
+      <p class="lupa__pista">Toca fuera de la imagen o presiona Esc para cerrar</p>
+    </div>
+
+    <script src="js/lupa.js" defer></script>
+  </body>
+</html>

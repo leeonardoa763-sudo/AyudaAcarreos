@@ -6,8 +6,8 @@
   (correlo cada vez que agregues un icono nuevo al sitio, o no se vera)
 
   Antes estos iconos venian del CDN de jsDelivr: 338 KB de CSS + 394 KB de
-  fuente = 723 KB, para usar solo 54 de los 7447 iconos que trae MDI.
-  Este archivo trae UNICAMENTE esos 54, y se sirve desde nuestro propio Vercel:
+  fuente = 723 KB, para usar solo 55 de los 7447 iconos que trae MDI.
+  Este archivo trae UNICAMENTE esos 55, y se sirve desde nuestro propio Vercel:
 
     1. Pesa ~99% menos.
     2. Ya no depende de que el CDN responda. En obra, con senal mala, antes se
@@ -89,6 +89,7 @@
 .mdi-refresh::before { content: "\F0450"; }
 .mdi-road-variant::before { content: "\F0462"; }
 .mdi-shield-account::before { content: "\F088F"; }
+.mdi-sitemap-outline::before { content: "\F199C"; }
 .mdi-swap-horizontal::before { content: "\F04E1"; }
 .mdi-tanker-truck::before { content: "\F0FE5"; }
 .mdi-truck::before { content: "\F053D"; }
