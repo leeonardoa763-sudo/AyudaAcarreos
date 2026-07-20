@@ -321,12 +321,29 @@ producción:
 
 ### 🔗 https://acarreos-ayuda.vercel.app
 
-Sin repo git: se despliega subiendo la carpeta con el CLI. Desde
-`acarreos-ayuda/`:
+### Repo: https://github.com/leeonardoa763-sudo/AyudaAcarreos (privado)
+
+**Conectado a Vercel: `git push` despliega solo.** Ya no hay que correr nada a
+mano:
+
+```
+git add -A
+git commit -m "lo que cambiaste"
+git push
+```
+
+`main` → producción. Cualquier otra rama → deploy de *preview* con su propia URL
+(útil para revisar un cambio antes de que lo vean los usuarios).
+
+Si alguna vez hace falta desplegar sin pasar por git (por ejemplo para probar
+algo rápido sin commit):
 
 ```
 vercel deploy --prod --yes
 ```
+
+Ojo: el nombre del repo (`AyudaAcarreos`) y el de la carpeta/proyecto Vercel
+(`acarreos-ayuda`) son distintos. Es normal, no hay que "arreglarlo".
 
 **URLs con `.html`** (decisión del usuario): `/guia-material.html`,
 `/guia-renta-camion.html`, etc. **NO activar `cleanUrls`** en `vercel.json`: la
@@ -358,10 +375,12 @@ Además así lo que se abre en local con doble clic es idéntico a producción.
 - [x] **Comprimir los videos**: 360 MB → 29 MB (−92 %). Receta en la sección de videos.
 - [x] Desplegar en Vercel (proyecto `acarreos-ayuda`, producción):
       **https://acarreos-ayuda.vercel.app**
+- [x] **Iconos auto-hospedados y recortados**: 723 KB (CDN) → 8.5 KB (−99 %), y ya
+      no dependen de que jsDelivr responda. Ver sección "Iconos".
+- [x] **Repo en GitHub** (privado) **conectado a Vercel**: `git push` despliega solo.
 - [ ] Enlazar el Centro de Ayuda desde la app móvil (`appAcarreos`).
-- [ ] Pendientes menores: favicon + `<meta name="description">`; auto-hospedar la
-      fuente de iconos MDI (hoy viene del CDN jsDelivr — sin internet la página
-      queda sin ningún icono, y eso pasa justo en obra).
+- [ ] Pendiente menor: favicon + `<meta name="description">` (hoy al compartir el
+      link por WhatsApp sale sin ícono ni descripción).
 - [ ] Tutoriales de **Renta de Pipa** (`guia-renta-pipa.html` está vacía a
       propósito, solo redirige a Renta de Camión).
 - [ ] **Presentación** (reveal.js) en el mismo proyecto.
