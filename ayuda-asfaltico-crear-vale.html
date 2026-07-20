@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<!--
+  ayuda-asfaltico-crear-vale.html — Lección: "Residente, crea un vale ASFÁLTICO".
+
+  A diferencia del material pétreo/corte, el vale asfáltico se crea COMPLETO: en
+  el mismo momento se asigna vehículo y operador y se toma la evidencia (foto).
+  Por eso tiene más pasos (asignar vehículo, cantidad en m³, evidencia + PDF).
+
+  Estructura de cada paso (se repite):
+    <section class="paso">
+      <div class="paso__texto"> ...número, título e instrucciones... </div>
+      <div class="telefono">    ...el marco con el <video>...            </div>
+    </section>
+
+  Gracias al CSS (.paso usa display:flex con flex-wrap), en pantalla ancha el
+  texto y el video quedan LADO A LADO, y en celular se APILAN automáticamente.
+
+  Los <video> apuntan a archivos en la carpeta videos/. Mientras no existan, el
+  reproductor se ve en negro; en cuanto coloques tus grabaciones con ese mismo
+  nombre, aparecen solas. No hay que tocar más el HTML.
+-->
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crear vale asfáltico — Ayuda Acarreos</title>
+
+    <!-- Fuente de iconos "Material Design Icons". Es EXACTAMENTE el mismo set
+         que usa la app (MaterialCommunityIcons), así que <i class="mdi mdi-truck"></i>
+         da el mismo dibujo. Antes venía de un CDN (723 KB para usar 54 iconos);
+         ahora css/iconos.css trae SOLO los que este sitio usa (8 KB) y se sirve
+         desde nuestro propio servidor, así que no depende de que el CDN responda. -->
+    <link rel="stylesheet" href="css/iconos.css" />
+
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+
+  <body>
+    <!-- ENCABEZADO ------------------------------------------------------ -->
+    <header class="encabezado">
+      <div class="contenedor">
+        <span class="chip">Para Residentes</span>
+        <h1 class="encabezado__titulo">Crear un vale asfáltico</h1>
+        <p class="encabezado__subtitulo">
+          Incluye asignar vehículo y tomar la evidencia. Sigue estos pasos.
+        </p>
+      </div>
+    </header>
+
+    <main class="principal">
+      <div class="contenedor">
+        <!-- Enlace para regresar a la portada. El &larr; es una flecha "←". -->
+        <a class="volver" href="guia-asfaltico.html">&larr; Volver a la gu&iacute;a</a>
+
+        <!-- Introducción: qué eres y qué vas a lograr. -->
+        <div class="intro">
+          <h2 class="intro__titulo">
+            <i class="mdi mdi-information-outline"></i> Antes de empezar
+          </h2>
+          <p>
+            A diferencia del material pétreo o de corte, el vale
+            <strong>asfáltico</strong> se crea <strong>completo</strong>: en el
+            mismo momento asignas el <strong>vehículo</strong> y el
+            <strong>operador</strong> y tomas la <strong>evidencia</strong> (foto)
+            para compartir el PDF. No queda pendiente.
+          </p>
+          <div class="nota nota--alerta">
+            <i class="mdi mdi-shield-account"></i>
+            <strong>Solo usuarios autorizados</strong> pueden crear vales
+            asfálticos, ya que se generan en la <strong>Planta de Asfaltos</strong>.
+            Si no ves la opción <em>Asfálticos</em>, no tienes ese permiso.
+          </div>
+        </div>
+
+        <!-- ===================== PASO 1 ===================== -->
+        <section class="paso">
+          <div class="paso__texto">
+            <div class="paso__numero">1</div>
+            <h3 class="paso__titulo">
+              <i class="mdi mdi-road-variant"></i> Abre "Nuevo vale" y elige Asfálticos
+            </h3>
+            <ul class="paso__lista">
+              <li>Entra a la app e inicia sesión con tu cuenta.</li>
+              <li>Toca el botón para crear un <strong>nuevo vale</strong>.</li>
+              <li>
+                En la pantalla de tipo de vale, elige <strong>Asfálticos</strong>.
+              </li>
+            </ul>
+          </div>
+
+          <div class="telefono">
+            <div class="telefono__muesca"></div>
+            <video
+              class="telefono__video"
+              controls
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              src="videos/asfaltico-paso-1.mp4"
+            ></video>
+            <p class="telefono__placeholder">Video: elegir tipo "Asfálticos"</p>
+          </div>
+        </section>
+
+        <!-- ===================== PASO 2 ===================== -->
+        <section class="paso">
+          <div class="paso__texto">
+            <div class="paso__numero">2</div>
+            <h3 class="paso__titulo">
+              <i class="mdi mdi-office-building-marker"></i> Selecciona la Obra
+            </h3>
+            <ul class="paso__lista">
+              <li>
+                En <strong>Datos de Vale</strong>, abre el selector de
+                <strong>Obra</strong> y elige la obra correcta.
+              </li>
+              <li>
+                La <strong>Empresa</strong> se llena <strong>sola</strong> según
+                la obra.
+              </li>
+            </ul>
+            <div class="nota">
+              <i class="mdi mdi-factory"></i>
+              El <strong>Banco</strong> se fija <strong>solo</strong> en la
+              <strong>Planta de Asfaltos</strong>: no tienes que elegirlo.
+            </div>
+          </div>
+
+          <div class="telefono">
+            <div class="telefono__muesca"></div>
+            <video
+              class="telefono__video"
+              controls
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              src="videos/asfaltico-paso-2.mp4"
+            ></video>
+            <p class="telefono__placeholder">Video: seleccionar obra</p>
+          </div>
+        </section>
+
+        <!-- ===================== PASO 3 ===================== -->
+        <section class="paso">
+          <div class="paso__texto">
+            <div class="paso__numero">3</div>
+            <h3 class="paso__titulo">
+              <i class="mdi mdi-dump-truck"></i> Elige el Material asfáltico
+            </h3>
+            <ul class="paso__lista">
+              <li>
+                Abre el selector de <strong>Material</strong> y elige el material
+                asfáltico que se moverá.
+              </li>
+              <li>
+                La <strong>Distancia</strong> se calcula <strong>sola</strong>
+                según el banco y la obra.
+              </li>
+            </ul>
+          </div>
+
+          <div class="telefono">
+            <div class="telefono__muesca"></div>
+            <video
+              class="telefono__video"
+              controls
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              src="videos/asfaltico-paso-3.mp4"
+            ></video>
+            <p class="telefono__placeholder">Video: elegir material asfáltico</p>
+          </div>
+        </section>
+
+        <!-- ===================== PASO 4 ===================== -->
+        <section class="paso">
+          <div class="paso__texto">
+            <div class="paso__numero">4</div>
+            <h3 class="paso__titulo">
+              <i class="mdi mdi-account-group"></i> Elige Sindicato
+            </h3>
+            <ul class="paso__lista">
+              <li>
+                Abre el selector de <strong>Sindicato</strong> y elige el
+                sindicato. Normalmente es <strong>CTM</strong>; pero si el camión
+                es de la empresa o interno, usa <strong>Grupo GEEM</strong>.
+              </li>
+            </ul>
+            <div class="nota nota--alerta">
+              <i class="mdi mdi-alert"></i>
+              <strong>Importante:</strong> elige el sindicato correctamente,
+              porque está <strong>enlazado a los camiones</strong>. Debes
+              elegirlo <strong>antes</strong> de asignar el vehículo (paso 6).
+            </div>
+          </div>
+
+          <div class="telefono">
+            <div class="telefono__muesca"></div>
+            <video
+              class="telefono__video"
+              controls
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              src="videos/asfaltico-paso-4.mp4"
+            ></video>
+            <p class="telefono__placeholder">Video: elegir sindicato</p>
+          </div>
+        </section>
+
+        <!-- ===================== PASO 5 ===================== -->
+        <section class="paso">
+          <div class="paso__texto">
+            <div class="paso__numero">5</div>
+            <h3 class="paso__titulo">
+              <i class="mdi mdi-cube-scan"></i> Captura la Cantidad de material
+            </h3>
+            <ul class="paso__lista">
+              <li>
+                Escribe la <strong>Cantidad de material</strong> en
+                <strong>m³</strong> (metros cúbicos). Acepta decimales, por
+                ejemplo <em>12.5</em>.
+              </li>
+            </ul>
+          </div>
+
+          <div class="telefono">
+            <div class="telefono__muesca"></div>
+            <video
+              class="telefono__video"
+              controls
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              src="videos/asfaltico-paso-5.mp4"
+            ></video>
+            <p class="telefono__placeholder">Video: cantidad en m³</p>
+          </div>
+        </section>
+
+        <!-- ===================== PASO 6 ===================== -->
+        <section class="paso">
+          <div class="paso__texto">
+            <div class="paso__numero">6</div>
+            <h3 class="paso__titulo">
+              <i class="mdi mdi-truck-plus"></i> Asigna el Vehículo
+            </h3>
+            <ul class="paso__lista">
+              <li>
+                Toca <strong>Asignar Vehículo</strong> y elige cómo buscarlo:
+                <strong>Escanear QR</strong> del camión o
+                <strong>Buscar por placas</strong>.
+              </li>
+              <li>
+                Las <strong>Placas</strong> y el <strong>Operador</strong> se
+                llenan <strong>solos</strong>. Si el operador no es el correcto,
+                usa <strong>Cambiar Operador</strong>.
+              </li>
+            </ul>
+            <div class="nota nota--alerta">
+              <i class="mdi mdi-alert"></i>
+              El vehículo debe ser del <strong>mismo sindicato</strong> que
+              elegiste. Si cambias de sindicato después de asignarlo, el vehículo
+              y el operador <strong>se borran</strong> y hay que asignarlos de
+              nuevo.
+            </div>
+          </div>
+
+          <div class="telefono">
+            <div class="telefono__muesca"></div>
+            <video
+              class="telefono__video"
+              controls
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              src="videos/asfaltico-paso-6.mp4"
+            ></video>
+            <p class="telefono__placeholder">Video: asignar vehículo (QR o placas)</p>
+          </div>
+        </section>
+
+        <!-- ===================== PASO 7 ===================== -->
+        <section class="paso">
+          <div class="paso__texto">
+            <div class="paso__numero">7</div>
+            <h3 class="paso__titulo">
+              <i class="mdi mdi-check-circle"></i> Agrega Notas y crea el vale
+            </h3>
+            <ul class="paso__lista">
+              <li>
+                Si hace falta, escribe <strong>Notas</strong> adicionales
+                (opcional).
+              </li>
+              <li>
+                Cuando todo esté listo, toca <strong>Crear Vale</strong>.
+              </li>
+            </ul>
+          </div>
+
+          <div class="telefono">
+            <div class="telefono__muesca"></div>
+            <video
+              class="telefono__video"
+              controls
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              src="videos/asfaltico-paso-7.mp4"
+            ></video>
+            <p class="telefono__placeholder">Video: notas + Crear Vale</p>
+          </div>
+        </section>
+
+        <!-- ===================== PASO 8 ===================== -->
+        <section class="paso">
+          <div class="paso__texto">
+            <div class="paso__numero">8</div>
+            <h3 class="paso__titulo">
+              <i class="mdi mdi-camera"></i> Toma la evidencia y comparte el PDF
+            </h3>
+            <ul class="paso__lista">
+              <li>
+                Aparecerá la sección <strong>Verificación de Foto</strong>: toma
+                la <strong>foto</strong> de evidencia y captura la
+                <strong>ubicación</strong>.
+              </li>
+              <li>
+                Cuando la foto esté lista, toca
+                <strong>Compartir PDF por WhatsApp</strong>.
+              </li>
+            </ul>
+          </div>
+
+          <div class="telefono">
+            <div class="telefono__muesca"></div>
+            <video
+              class="telefono__video"
+              controls
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              src="videos/asfaltico-paso-8.mp4"
+            ></video>
+            <p class="telefono__placeholder">Video: evidencia + compartir PDF</p>
+          </div>
+        </section>
+
+        <!-- ===================== PASO 9 ===================== -->
+        <section class="paso">
+          <div class="paso__texto">
+            <div class="paso__numero">9</div>
+            <h3 class="paso__titulo">
+              <i class="mdi mdi-printer-pos"></i> Imprime el ticket físico (2 copias)
+            </h3>
+            <ul class="paso__lista">
+              <li>
+                Después de compartir el PDF aparece el modal
+                <strong>Ticket Físico</strong>. Es <strong>obligatorio</strong>:
+                no se cierra hasta que imprimas (o confirmes que no hay
+                impresora).
+              </li>
+              <li>
+                Toca <strong>Buscar impresoras</strong> y elige tu impresora
+                térmica por Bluetooth. Si quieres, revisa antes con
+                <strong>Ver ticket antes de imprimir</strong>.
+              </li>
+              <li>
+                El modal imprime <strong>un ticket a la vez</strong>. Cuando
+                pregunte <em>"¿Se imprimió correctamente?"</em>, para sacar la
+                <strong>segunda copia</strong> toca <strong>No, reintentar</strong>
+                e imprime otra vez. Cuando ya tengas las <strong>2 copias</strong>,
+                toca <strong>Sí, continuar</strong>.
+              </li>
+            </ul>
+            <div class="nota nota--alerta">
+              <i class="mdi mdi-content-copy"></i>
+              <strong>¿Por qué 2 copias?</strong> Una se la entregas al
+              <strong>camionero</strong>: es su <strong>justificante</strong> de
+              que se realizó el viaje. La otra se <strong>deja en la obra</strong>
+              al momento de la entrega.
+            </div>
+
+            <!-- Desplegable con la imagen de ejemplo del ticket impreso. Usa el
+                 mismo patron .saber-mas del paso de requisicion (details nativo). -->
+            <details class="saber-mas">
+              <summary class="saber-mas__boton">
+                <i class="mdi mdi-receipt-text-outline"></i> Ver la copia que se imprime
+              </summary>
+              <div class="saber-mas__contenido">
+                <p>
+                  Así se ve el <strong>ticket físico</strong> que sale de la
+                  impresora térmica y que entregas al camionero y dejas en obra:
+                </p>
+                <img
+                  class="saber-mas__img"
+                  src="img/ticket-asfaltico-ejemplo.jpg"
+                  alt="Ejemplo del ticket físico impreso de un vale asfáltico"
+                />
+              </div>
+            </details>
+          </div>
+
+          <div class="telefono">
+            <div class="telefono__muesca"></div>
+            <video
+              class="telefono__video"
+              controls
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              src="videos/asfaltico-paso-9.mp4"
+            ></video>
+            <p class="telefono__placeholder">Video: imprimir ticket (2 copias)</p>
+          </div>
+        </section>
+
+        <!-- ===================== RESULTADO ===================== -->
+        <!-- Toda la tarjeta verde es ahora un ENLACE (<a>): al tocarla regresas
+             a la página principal. El <span> de adentro solo le da aspecto de
+             botón para que se note que es clickeable. -->
+        <a class="resultado" href="guia-asfaltico.html">
+          <h2 class="resultado__titulo">
+            <i class="mdi mdi-check-circle"></i> ¡Listo! Vale asfáltico creado
+          </h2>
+          <p>
+            El vale queda <strong>emitido</strong> con su folio, vehículo y
+            operador ya asignados, con la evidencia compartida por WhatsApp y las
+            <strong>2 copias del ticket</strong> impresas.
+          </p>
+          <span class="resultado__boton">
+            <i class="mdi mdi-home"></i> Volver a la gu&iacute;a
+          </span>
+        </a>
+      </div>
+    </main>
+
+    <footer class="pie">
+      <div class="contenedor">Control de Acarreos · Centro de Ayuda</div>
+    </footer>
+
+    <!-- JavaScript: reproduce cada video automáticamente cuando entra en
+         pantalla y lo pausa cuando sale. Se pone al FINAL del body para que el
+         HTML ya exista cuando el script corre. -->
+    <script src="js/tutorial.js"></script>
+  </body>
+</html>

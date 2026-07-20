@@ -1,0 +1,14 @@
+# Vinculo local con el proyecto de Vercel (IDs de tu cuenta). No va al repo.
+.vercel
+
+# Copia de la fuente MDI completa (394 KB) que descarga herramientas/generar-iconos.py.
+# Se vuelve a bajar sola cuando haga falta; no tiene caso versionarla.
+herramientas/.cache-mdi.woff2
+
+# Entorno de Python para correr ese script.
+.venv/
+
+# Basura del sistema
+Thumbs.db
+desktop.ini
+.DS_Store

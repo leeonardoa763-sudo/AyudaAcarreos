@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<!--
+  ayuda-material-crear-vale.html — Lección: "Residente, crea un vale de MATERIAL".
+
+  Cubre material PÉTREO y de CORTE: en la app ambos se crean desde la MISMA
+  pantalla (botón "Material" del selector). La única diferencia es que el campo
+  "Requisición" (paso 5) aparece SOLO cuando el material es pétreo.
+
+  Estructura de cada paso (se repite):
+    <section class="paso">
+      <div class="paso__texto"> ...número, título e instrucciones... </div>
+      <div class="telefono">    ...el marco con el <video>...            </div>
+    </section>
+
+  Gracias al CSS (.paso usa display:flex con flex-wrap), en pantalla ancha el
+  texto y el video quedan LADO A LADO, y en celular se APILAN automáticamente.
+
+  Los <video> apuntan a archivos en la carpeta videos/. Mientras no existan, el
+  reproductor se ve en negro; en cuanto coloques tus grabaciones con ese mismo
+  nombre, aparecen solas. No hay que tocar más el HTML.
+-->
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crear vale de material — Ayuda Acarreos</title>
+
+    <!-- Fuente de iconos "Material Design Icons". Es EXACTAMENTE el mismo set
+         que usa la app (MaterialCommunityIcons), así que <i class="mdi mdi-truck"></i>
+         da el mismo dibujo. Antes venía de un CDN (723 KB para usar 54 iconos);
+         ahora css/iconos.css trae SOLO los que este sitio usa (8 KB) y se sirve
+         desde nuestro propio servidor, así que no depende de que el CDN responda. -->
+    <link rel="stylesheet" href="css/iconos.css" />
+
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+
+  <body>
+    <!-- ENCABEZADO ------------------------------------------------------ -->
+    <header class="encabezado">
+      <div class="contenedor">
+        <span class="chip">Para Residentes</span>
+        <h1 class="encabezado__titulo">Crear un vale de material</h1>
+        <p class="encabezado__subtitulo">
+          Material pétreo o de corte. Sigue estos pasos dentro de la app.
+        </p>
+      </div>
+    </header>
+
+    <main class="principal">
+      <div class="contenedor">
+        <!-- Enlace para regresar a la portada. El &larr; es una flecha "←". -->
+        <a class="volver" href="guia-material.html">&larr; Volver a la gu&iacute;a</a>
+
+        <!-- Introducción: qué eres y qué vas a lograr. -->
+        <div class="intro">
+          <h2 class="intro__titulo">
+            <i class="mdi mdi-information-outline"></i> Antes de empezar
+          </h2>
+          <p>
+            Esta lección sirve para material <strong>pétreo</strong> y de
+            <strong>corte</strong>: ambos se crean desde la misma pantalla. El
+            tipo lo define el <strong>material que elijas</strong>; el único paso
+            que cambia es la <em>Requisición</em> (paso 5), que solo aparece para
+            material pétreo.
+          </p>
+          <p>
+            Como <strong>residente</strong>, tu trabajo es <strong>dar de alta el
+            vale</strong>. El operador, el vehículo y los viajes se asignan
+            después desde la sección <em>Acarreos</em> (eso lo hace el checador).
+          </p>
+        </div>
+
+        <!-- ===================== PASO 1 ===================== -->
+        <section class="paso">
+          <div class="paso__texto">
+            <div class="paso__numero">1</div>
+            <h3 class="paso__titulo">
+              <i class="mdi mdi-cube-outline"></i> Abre "Nuevo vale" y elige Material
+            </h3>
+            <ul class="paso__lista">
+              <li>Entra a la app e inicia sesión con tu cuenta.</li>
+              <li>Toca el botón para crear un <strong>nuevo vale</strong>.</li>
+              <li>
+                En la pantalla de tipo de vale, elige <strong>Material</strong>.
+              </li>
+            </ul>
+          </div>
+
+          <!-- Marco de teléfono con el video del paso 1. -->
+          <div class="telefono">
+            <div class="telefono__muesca"></div>
+            <video
+              class="telefono__video"
+              controls
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              src="videos/material-paso-1.mp4"
+            ></video>
+            <p class="telefono__placeholder">Video: elegir tipo "Material"</p>
+          </div>
+        </section>
+
+        <!-- ===================== PASO 2 ===================== -->
+        <section class="paso">
+          <div class="paso__texto">
+            <div class="paso__numero">2</div>
+            <h3 class="paso__titulo">
+              <i class="mdi mdi-office-building-marker"></i> Selecciona la Obra
+            </h3>
+            <ul class="paso__lista">
+              <li>
+                En <strong>Datos de Vale</strong>, abre el selector de
+                <strong>Obra</strong> y elige la obra correcta.
+              </li>
+              <li>
+                La <strong>Empresa</strong> se llena <strong>sola</strong> según
+                la obra que elegiste: no tienes que escribirla.
+              </li>
+            </ul>
+            <div class="nota">
+              <i class="mdi mdi-refresh"></i>
+              Si no ves tu obra o tu material en la lista, usa el botón
+              <strong>Refrescar catálogo</strong> y vuelve a abrir el selector.
+            </div>
+          </div>
+
+          <div class="telefono">
+            <div class="telefono__muesca"></div>
+            <video
+              class="telefono__video"
+              controls
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              src="videos/material-paso-2.mp4"
+            ></video>
+            <p class="telefono__placeholder">Video: seleccionar obra</p>
+          </div>
+        </section>
+
+        <!-- ===================== PASO 3 ===================== -->
+        <section class="paso">
+          <div class="paso__texto">
+            <div class="paso__numero">3</div>
+            <h3 class="paso__titulo">
+              <i class="mdi mdi-dump-truck"></i> Elige Material y Banco
+            </h3>
+            <ul class="paso__lista">
+              <li>
+                Abre el selector de <strong>Material</strong> y elige el que se
+                moverá. <strong>Aquí se decide</strong> si el vale es
+                <strong>pétreo</strong> o de <strong>corte</strong>: depende del
+                material que selecciones.
+              </li>
+              <li>
+                Abre el selector de <strong>Banco de material</strong> y elige de
+                dónde sale el material.
+              </li>
+            </ul>
+            <div class="nota nota--alerta">
+              <i class="mdi mdi-alert"></i>
+              <strong>Aquí sí importa el material.</strong> A diferencia de la
+              renta, este material <strong>no es dinámico</strong>: todos los
+              viajes de este vale se registrarán <strong>con ese mismo
+              material</strong>. Elígelo con cuidado.
+            </div>
+            <div class="nota">
+              <i class="mdi mdi-cash-multiple"></i>
+              Al elegir el material, en la parte superior aparece el
+              <strong>presupuesto asignado</strong> a la obra para ese material.
+              Sin presupuesto disponible <strong>no podrás crear vales</strong>;
+              si necesitas más, contacta al <strong>administrador</strong>.
+            </div>
+          </div>
+
+          <div class="telefono">
+            <div class="telefono__muesca"></div>
+            <video
+              class="telefono__video"
+              controls
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              src="videos/material-paso-3.mp4"
+            ></video>
+            <p class="telefono__placeholder">Video: material y banco</p>
+          </div>
+        </section>
+
+        <!-- ===================== PASO 4 ===================== -->
+        <section class="paso">
+          <div class="paso__texto">
+            <div class="paso__numero">4</div>
+            <h3 class="paso__titulo">
+              <i class="mdi mdi-account-group"></i> Elige Sindicato (la Distancia se llena sola)
+            </h3>
+            <ul class="paso__lista">
+              <li>
+                Abre el selector de <strong>Sindicato</strong> y elige el
+                sindicato. Normalmente es <strong>CTM</strong>; pero si el camión
+                es de la empresa o interno, usa <strong>Grupo GEEM</strong>.
+              </li>
+              <li>
+                La <strong>Distancia</strong> se calcula <strong>sola</strong>
+                según el banco y la obra. Si aparece vacía, avisa al
+                administrador para que registre esa distancia.
+              </li>
+            </ul>
+            <div class="nota nota--alerta">
+              <i class="mdi mdi-alert"></i>
+              <strong>Importante:</strong> elige el sindicato correctamente,
+              porque los sindicatos están <strong>enlazados a los camiones</strong>.
+              Si eliges un sindicato equivocado, esos camiones
+              <strong>no aparecerán</strong> al momento de registrar los viajes.
+            </div>
+          </div>
+
+          <div class="telefono">
+            <div class="telefono__muesca"></div>
+            <video
+              class="telefono__video"
+              controls
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              src="videos/material-paso-4.mp4"
+            ></video>
+            <p class="telefono__placeholder">Video: sindicato y distancia</p>
+          </div>
+        </section>
+
+        <!-- ===================== PASO 5 ===================== -->
+        <section class="paso">
+          <div class="paso__texto">
+            <div class="paso__numero">5</div>
+            <!-- Reutilizamos la etiqueta .chip (misma forma de pastilla) pero la
+                 recoloreamos en verde con una variable de la paleta, para que se
+                 distinga del chip naranja de rol del encabezado y comunique que
+                 este paso es condicional. -->
+            <span class="chip" style="background: var(--color-accent)">Solo pétreo</span>
+            <h3 class="paso__titulo">
+              <i class="mdi mdi-file-document-outline"></i> Captura la Requisición
+            </h3>
+            <ul class="paso__lista">
+              <li>
+                Si elegiste un material <strong>pétreo</strong> (por ejemplo
+                <strong>base hidráulica</strong>, <strong>arena</strong> o
+                <strong>grava</strong>), aparecerá el campo
+                <strong>Requisición</strong>. Es <strong>obligatorio</strong>:
+                escribe su folio (ej. <em>REQ 149-00020</em>).
+              </li>
+              <li>
+                Si tu material es de <strong>corte</strong> (producto de
+                excavación, como <strong>tepetate</strong>,
+                <strong>escombro</strong> o <strong>basura</strong>), este campo
+                <strong>no aparece</strong>: salta directo al paso 6.
+              </li>
+            </ul>
+
+            <!-- <details> es una etiqueta de HTML que crea un desplegable SIN
+                 JavaScript: muestra solo el <summary> (el botón) y, al hacer
+                 clic, revela el resto. Ideal para una explicación opcional. -->
+            <details class="saber-mas">
+              <summary class="saber-mas__boton">
+                <i class="mdi mdi-help-circle-outline"></i> ¿Qué es una requisición?
+              </summary>
+              <div class="saber-mas__contenido">
+                <p>
+                  Una <strong>requisición de compra</strong> es el documento con
+                  el que la obra solicita y autoriza el material. Trae un
+                  <strong>folio</strong> en la parte superior derecha: ese folio
+                  es el que escribes en el campo Requisición.
+                </p>
+                <img
+                  class="saber-mas__img"
+                  src="img/requisicion-ejemplo.png"
+                  alt="Ejemplo de una requisición de compra con su folio"
+                />
+              </div>
+            </details>
+          </div>
+
+          <div class="telefono">
+            <div class="telefono__muesca"></div>
+            <video
+              class="telefono__video"
+              controls
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              src="videos/material-paso-5.mp4"
+            ></video>
+            <p class="telefono__placeholder">Video: requisición (material pétreo)</p>
+          </div>
+        </section>
+
+        <!-- ===================== PASO 6 ===================== -->
+        <section class="paso">
+          <div class="paso__texto">
+            <div class="paso__numero">6</div>
+            <h3 class="paso__titulo">
+              <i class="mdi mdi-check-circle"></i> Cantidad de vales y crea el vale
+            </h3>
+            <ul class="paso__lista">
+              <li>
+                Si ese día necesitas <strong>varios vales iguales</strong>, ajusta
+                la <strong>Cantidad de vales</strong> para crearlos en lote.
+              </li>
+              <li>
+                Cuando todo esté listo, toca <strong>Crear Vale</strong>.
+              </li>
+            </ul>
+            <div class="nota nota--alerta">
+              <i class="mdi mdi-alert"></i>
+              Si aparece <strong>"Presupuesto Agotado"</strong>, la obra ya no
+              tiene presupuesto disponible para ese material y el botón queda
+              deshabilitado.
+            </div>
+          </div>
+
+          <div class="telefono">
+            <div class="telefono__muesca"></div>
+            <video
+              class="telefono__video"
+              controls
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              src="videos/material-paso-6.mp4"
+            ></video>
+            <p class="telefono__placeholder">Video: cantidad de vales + Crear Vale</p>
+          </div>
+        </section>
+
+        <!-- Regla general: un vale = un camión. Va fuera de los pasos, como
+             recordatorio destacado justo antes del cierre. -->
+        <div class="nota nota--alerta" style="margin-bottom: 24px">
+          <i class="mdi mdi-truck-plus"></i>
+          <strong>Recuerda:</strong> se crea <strong>un vale por camión</strong>.
+          Si ese día necesitas 2 camiones, crea <strong>dos vales</strong> (o usa
+          la cantidad de vales en lote).
+        </div>
+
+        <!-- ===================== RESULTADO ===================== -->
+        <!-- Toda la tarjeta verde es ahora un ENLACE (<a>): al tocarla regresas
+             a la página principal. El <span> de adentro solo le da aspecto de
+             botón para que se note que es clickeable. -->
+        <a class="resultado" href="guia-material.html">
+          <h2 class="resultado__titulo">
+            <i class="mdi mdi-check-circle"></i> ¡Listo! Vale creado
+          </h2>
+          <p>
+            Verás un mensaje de <strong>"Vale creado"</strong> con su folio. El
+            operador y el vehículo quedan <strong>pendientes</strong>: se asignan
+            después desde <em>Acarreos</em>. Toca <strong>Ir a Acarreos</strong>
+            para continuar.
+          </p>
+          <span class="resultado__boton">
+            <i class="mdi mdi-home"></i> Volver a la gu&iacute;a
+          </span>
+        </a>
+      </div>
+    </main>
+
+    <footer class="pie">
+      <div class="contenedor">Control de Acarreos · Centro de Ayuda</div>
+    </footer>
+
+    <!-- JavaScript: reproduce cada video automáticamente cuando entra en
+         pantalla y lo pausa cuando sale. Se pone al FINAL del body para que el
+         HTML ya exista cuando el script corre. -->
+    <script src="js/tutorial.js"></script>
+  </body>
+</html>

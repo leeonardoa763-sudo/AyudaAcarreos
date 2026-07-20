@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<!--
+  guia-renta-camion.html — Guía completa de RENTA DE CAMIÓN.
+
+  Antes esto era la portada (index.html). Ahora la portada es solo un menú con
+  4 botones grandes, y cada botón lleva a una guía como esta. Así el usuario
+  primero decide QUÉ quiere ver, y hasta entonces aparecen los pasos.
+-->
+<html lang="es">
+  <head>
+    <!-- charset UTF-8 permite acentos y ñ sin que se vean rotos. -->
+    <meta charset="UTF-8" />
+
+    <!-- viewport: indispensable para que se vea bien en celular. Dice
+         "usa el ancho real del dispositivo" en vez de fingir una pantalla
+         de escritorio y encoger todo. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Lo que aparece en la pestaña del navegador. -->
+    <title>Renta de Camión — Ayuda Control de Acarreos</title>
+
+    <!-- Fuente de iconos "Material Design Icons". Es EXACTAMENTE el mismo set
+         que usa la app (MaterialCommunityIcons), así que <i class="mdi mdi-truck"></i>
+         da el mismo dibujo. Antes venía de un CDN (723 KB para usar 54 iconos);
+         ahora css/iconos.css trae SOLO los que este sitio usa (8 KB) y se sirve
+         desde nuestro propio servidor, así que no depende de que el CDN responda. -->
+    <link rel="stylesheet" href="css/iconos.css" />
+
+    <!-- Enlazamos nuestro CSS. La ruta es relativa a este archivo. -->
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+
+  <body>
+    <!-- ENCABEZADO ------------------------------------------------------ -->
+    <header class="encabezado">
+      <div class="contenedor">
+        <h1 class="encabezado__titulo">
+          <i class="mdi mdi-dump-truck"></i> Renta de Camión
+        </h1>
+        <p class="encabezado__subtitulo">
+          Todo el proceso, del vale inicial al cierre
+        </p>
+      </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL --------------------------------------------- -->
+    <main class="principal">
+      <div class="contenedor">
+        <!-- Enlace para regresar al menú de las 4 opciones. -->
+        <a class="volver" href="index.html">
+          <i class="mdi mdi-arrow-left"></i> Volver al inicio
+        </a>
+
+        <div class="intro">
+          <h2 class="intro__titulo">
+            <i class="mdi mdi-map-marker-path"></i> Sigue el camino del acarreo
+          </h2>
+          <p>
+            Así fluye una renta de camión de principio a fin. Toca cualquier
+            parada con <strong>flecha</strong> para ver su tutorial. Los pasos
+            del <strong>checador</strong> se abren aquí mismo, uno a la vez, y
+            al terminar vuelves a esta guía para el siguiente.
+          </p>
+        </div>
+
+        <h2 class="ruta-titulo">El proceso, paso a paso</h2>
+
+        <!-- EL CAMINO / MAPA DEL PROCESO ------------------------------------
+             Cada <a class="ruta__parada"> es una parada que lleva a un tutorial.
+             Los <div class="ruta__viaje"> y <div class="ruta__ciclo"> son nodos
+             ilustrativos (no enlaces): el viaje animado del camión y el ciclo. -->
+        <div class="ruta">
+          <!-- PARADA 1 — Residente crea el vale -->
+          <a class="ruta__parada" href="ayuda-renta-crear-vale.html">
+            <span class="ruta__num">1</span>
+            <span class="ruta__contenido">
+              <span class="ruta__rol">Residente</span>
+              <span class="ruta__parada-titulo">
+                <i class="mdi mdi-file-document-plus"></i> Crear el vale inicial
+              </span>
+              <span class="ruta__parada-texto">
+                El residente da de alta el vale de renta. Es el punto de partida
+                de todo el proceso.
+              </span>
+              <span class="ruta__ir"><i class="mdi mdi-play-circle"></i> Ver tutorial</span>
+            </span>
+          </a>
+
+          <!-- PARADA 2 — Checador asigna el vehículo (QR)
+               Ahora es un <button> con data-paso="asignar": el JS lo escucha y
+               abre el modal de ese paso. Antes era un <a> que llevaba a otra
+               página; ya no hace falta salir de aquí. -->
+          <button type="button" class="ruta__parada" data-paso="asignar">
+            <span class="ruta__num ruta__num--checador">2</span>
+            <span class="ruta__contenido">
+              <span class="ruta__rol ruta__rol--checador">Checador</span>
+              <span class="ruta__parada-titulo">
+                <i class="mdi mdi-qrcode-scan"></i> Asignar el vehículo
+              </span>
+              <span class="ruta__parada-texto">
+                Escanea el QR del camión, confirma al operador y vincúlalo al
+                vale de renta.
+              </span>
+              <span class="ruta__ir"><i class="mdi mdi-play-circle"></i> Ver tutorial</span>
+            </span>
+          </button>
+
+          <!-- PARADA 3 — Checador imprime el ticket de descarga -->
+          <button type="button" class="ruta__parada" data-paso="ticket">
+            <span class="ruta__num ruta__num--checador">3</span>
+            <span class="ruta__contenido">
+              <span class="ruta__rol ruta__rol--checador">Checador</span>
+              <span class="ruta__parada-titulo">
+                <i class="mdi mdi-printer"></i> Imprimir el ticket de descarga
+              </span>
+              <span class="ruta__parada-texto">
+                Anota el banco e imprime el primer ticket. El camión se lo lleva
+                para poder descargar allá.
+              </span>
+              <span class="ruta__ir"><i class="mdi mdi-play-circle"></i> Ver tutorial</span>
+            </span>
+          </button>
+
+          <!-- NODO VIAJE — diagrama ESTÁTICO: el camión va al banco (con su
+               ticket) y regresa a la obra. Iconos MDI + curvas punteadas.
+               (Placeholder: luego se sustituye por una imagen/gif.) -->
+          <div class="ruta__viaje">
+            <span class="ruta__num ruta__num--viaje">
+              <i class="mdi mdi-truck"></i>
+            </span>
+            <div class="ruta__viaje-contenido">
+              <div class="ruta__viaje-titulo">
+                <i class="mdi mdi-map-marker-distance"></i> El camión va al banco…
+                y regresa
+              </div>
+
+              <!-- Solo texto (sin imágenes). -->
+              <p class="ruta__viaje-texto">
+                El camión sale de la obra rumbo al
+                <strong>banco o lugar de descarga</strong>, tira el material y
+                <strong>regresa a la obra</strong> para el siguiente viaje.
+              </p>
+            </div>
+          </div>
+
+          <!-- PARADA 4 — Checador registra el viaje al regresar -->
+          <button type="button" class="ruta__parada" data-paso="registrar">
+            <span class="ruta__num ruta__num--checador">4</span>
+            <span class="ruta__contenido">
+              <span class="ruta__rol ruta__rol--checador">Checador</span>
+              <span class="ruta__parada-titulo">
+                <i class="mdi mdi-clipboard-check"></i> Registrar el viaje
+              </span>
+              <span class="ruta__parada-texto">
+                Cuando el camión vuelve, registra el viaje en la app con un solo
+                toque.
+              </span>
+              <span class="ruta__ir"><i class="mdi mdi-play-circle"></i> Ver tutorial</span>
+            </span>
+          </button>
+
+          <!-- NODO CICLO — se repite hasta terminar la jornada -->
+          <div class="ruta__ciclo">
+            <span class="ruta__num ruta__num--ciclo">
+              <i class="mdi mdi-refresh"></i>
+            </span>
+            <div class="ruta__ciclo-contenido">
+              <p>
+                <strong>Y se repite:</strong> imprimir el siguiente ticket → el
+                camión viaja y descarga → registrar el viaje… así en ciclo hasta
+                que termina la jornada.
+              </p>
+
+              <!-- Diagrama del ciclo de renta (imagen). -->
+              <img
+                class="ruta__ciclo-img"
+                src="img/ciclo-renta.jpg"
+                alt="Ciclo de renta: el checador registra el viaje e imprime el ticket; el operador viaja al banco, descarga el material y entrega el ticket; y el ciclo se repite."
+              />
+            </div>
+          </div>
+
+          <!-- PARADA 5 — Checador completa/cierra el vale -->
+          <button type="button" class="ruta__parada" data-paso="completar">
+            <span class="ruta__num ruta__num--checador">5</span>
+            <span class="ruta__contenido">
+              <span class="ruta__rol ruta__rol--checador">Checador</span>
+              <span class="ruta__parada-titulo">
+                <i class="mdi mdi-check-circle"></i> Completar y cerrar el vale
+              </span>
+              <span class="ruta__parada-texto">
+                Captura la hora de fin y la evidencia, y cierra el vale: queda
+                <strong>emitido</strong>.
+              </span>
+              <span class="ruta__ir"><i class="mdi mdi-play-circle"></i> Ver tutorial</span>
+            </span>
+          </button>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- ================= MODAL DE PASO (guía del checador) =================
+         Una sola ventana flotante que contiene los CUATRO pasos del checador.
+         Empieza oculta (atributo `hidden`). El JavaScript de js/guia-modales.js
+         la muestra y deja visible solo el paso que tocaste (el que tenga la
+         clase .modal__paso--activo).
+
+         Cada <article> lleva:
+           data-paso       = nombre del paso (coincide con el data-paso del botón)
+           data-siguiente  = a qué paso salta el botón "Siguiente" (el último no lo tiene)
+         Los <video> apuntan a archivos que aún no existen: se ven en negro hasta
+         que coloques las grabaciones con ese nombre en la carpeta videos/. -->
+    <div class="modal-fondo" id="modal-checador" hidden>
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-titulo-activo"
+      >
+        <!-- Botón "X" para cerrar (arriba a la derecha). -->
+        <button
+          type="button"
+          class="modal__cerrar"
+          data-cerrar
+          aria-label="Cerrar y volver a la guía"
+        >
+          &times;
+        </button>
+
+        <!-- ---------- PASO: ASIGNAR (Paso 2) ---------- -->
+        <article class="modal__paso" data-paso="asignar" data-siguiente="ticket">
+          <span class="modal__etiqueta">Paso 2 · Para checadores</span>
+          <h2 class="modal__titulo">
+            <i class="mdi mdi-qrcode-scan"></i> Asigna el vehículo al vale
+          </h2>
+          <div class="modal__cuerpo">
+            <div class="modal__texto">
+              <ul class="paso__lista">
+                <li>
+                  En la pantalla <strong>Vales</strong>, toca
+                  <strong>“Asignar Vehículo”</strong>.
+                </li>
+                <li>
+                  <strong>Escanea el QR</strong> del camión. Con eso queda
+                  vinculado al vale (las placas van ligadas a ese QR).
+                </li>
+                <li>
+                  Revisa el <strong>“Operador en turno”</strong>. Si no es el
+                  correcto, toca <strong>“Cambiar”</strong> y búscalo.
+                </li>
+                <li>
+                  En <strong>“Selecciona un vale para asignar”</strong>, busca tu
+                  vale dentro de <strong>“Renta de Equipo”</strong> y tócalo.
+                </li>
+                <li>
+                  Confirma en <strong>“Confirmar asignación”</strong> con el botón
+                  <strong>“Asignar”</strong>.
+                </li>
+              </ul>
+
+              <div class="nota nota--alerta">
+                <i class="mdi mdi-alert"></i>
+                <strong>Si el camión no aparece</strong> en la lista, casi siempre
+                es por el <strong>sindicato</strong>: debe coincidir con el del
+                vale (normalmente <strong>CTM</strong>; camión de empresa/interno →
+                <strong>Grupo GEEM</strong>).
+              </div>
+
+              <div class="nota">
+                <i class="mdi mdi-information"></i>
+                Al asignar, la app te lleva sola al detalle del vale en la sección
+                <strong>Acarreos</strong>. Ahí siguen los demás pasos.
+              </div>
+            </div>
+
+            <div class="telefono">
+              <div class="telefono__muesca"></div>
+              <video
+                class="telefono__video"
+                controls
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                src="videos/renta-checador-paso-1.mp4"
+              ></video>
+              <p class="telefono__placeholder">Video: asignar vehículo (QR)</p>
+            </div>
+          </div>
+
+          <div class="modal__pie">
+            <button type="button" class="modal__boton" data-cerrar>
+              <i class="mdi mdi-arrow-left"></i> Volver a la guía
+            </button>
+            <button type="button" class="modal__boton modal__boton--siguiente" data-siguiente>
+              Siguiente paso <i class="mdi mdi-arrow-right"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- ---------- PASO: TICKET (Paso 3) ---------- -->
+        <article class="modal__paso" data-paso="ticket" data-siguiente="registrar">
+          <span class="modal__etiqueta">Paso 3 · Para checadores</span>
+          <h2 class="modal__titulo">
+            <i class="mdi mdi-printer"></i> Imprime el primer ticket de descarga
+          </h2>
+          <div class="modal__cuerpo">
+            <div class="modal__texto">
+              <p class="paso__parrafo">
+                Este paso aplica cuando el material se va a
+                <strong>tirar a un banco</strong> (basura, escombro, demolición,
+                desperdicio…). Es lo que el camión entrega en el banco para que lo
+                dejen descargar.
+              </p>
+              <ul class="paso__lista">
+                <li>
+                  En el detalle del vale, en
+                  <strong>“Tickets de Descarga”</strong>, toca
+                  <strong>“Imprimir Primer Ticket de Descarga”</strong>.
+                </li>
+                <li>
+                  Escribe el <strong>banco</strong> donde se descargará (modal
+                  <strong>“Ticket de Descarga”</strong>) y toca
+                  <strong>“Imprimir”</strong>.
+                </li>
+                <li>
+                  Confirma el <strong>material</strong> que se mueve en este viaje
+                  (modal <strong>“Material — Ticket #01”</strong>).
+                </li>
+                <li>
+                  En <strong>“Ticket Físico”</strong>, toca
+                  <strong>“Buscar impresoras”</strong> e imprime por Bluetooth.
+                </li>
+              </ul>
+
+              <div class="nota">
+                <i class="mdi mdi-truck-fast"></i>
+                Con el ticket impreso, el camión ya puede salir al banco.
+                <strong>Puedes cerrar la app:</strong> el ticket viaja con el
+                camión y tú registras el viaje cuando regrese.
+              </div>
+
+              <details class="saber-mas">
+                <summary class="saber-mas__boton">
+                  <i class="mdi mdi-help-circle"></i> ¿Y si la renta no lleva
+                  material de descarga?
+                </summary>
+                <div class="saber-mas__contenido">
+                  Si el equipo rentado <strong>no</strong> tira material en un
+                  banco, <strong>no hay tickets</strong>: la sección “Tickets de
+                  Descarga” ni siquiera aparece. En ese caso te saltas este paso y
+                  solo registras los viajes/turnos (Paso 4), respetando el tiempo
+                  mínimo entre uno y otro.
+                </div>
+              </details>
+            </div>
+
+            <div class="telefono">
+              <div class="telefono__muesca"></div>
+              <video
+                class="telefono__video"
+                controls
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                src="videos/renta-checador-paso-2.mp4"
+              ></video>
+              <p class="telefono__placeholder">Video: imprimir ticket de descarga</p>
+            </div>
+          </div>
+
+          <div class="modal__pie">
+            <button type="button" class="modal__boton" data-cerrar>
+              <i class="mdi mdi-arrow-left"></i> Volver a la guía
+            </button>
+            <button type="button" class="modal__boton modal__boton--siguiente" data-siguiente>
+              Siguiente paso <i class="mdi mdi-arrow-right"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- ---------- PASO: REGISTRAR (Paso 4) ----------
+             Aquí doblamos el mensaje del "ciclo": registrar un viaje es la acción
+             que se repite en bucle, así que lo explicamos en este mismo paso. -->
+        <article class="modal__paso" data-paso="registrar" data-siguiente="completar">
+          <span class="modal__etiqueta">Paso 4 · Para checadores</span>
+          <h2 class="modal__titulo">
+            <i class="mdi mdi-clipboard-check"></i> Registra el viaje al regresar
+          </h2>
+          <div class="modal__cuerpo">
+            <div class="modal__texto">
+              <ul class="paso__lista">
+                <li>
+                  Cuando el camión vuelve, en la sección
+                  <strong>“Completar Vale”</strong> toca
+                  <strong>“Registrar Primer Viaje”</strong> (después dirá
+                  <strong>“Registrar Viaje 2”</strong>, y así).
+                </li>
+                <li>
+                  Confirma el aviso <strong>“Registrar Viaje”</strong>. Eso es
+                  todo: no pide capturar más datos (la app guarda la hora sola).
+                </li>
+              </ul>
+
+              <div class="nota nota--alerta">
+                <i class="mdi mdi-alert"></i>
+                Debe pasar un <strong>tiempo mínimo entre viajes</strong> (por
+                defecto ~20 min) y, si es material de descarga, hay que tener el
+                <strong>ticket impreso</strong> antes de registrar. Si falta algo,
+                la app te lo avisa y el botón queda deshabilitado.
+              </div>
+
+              <div class="nota">
+                <i class="mdi mdi-refresh"></i>
+                <strong>Y se repite en ciclo:</strong> registrar el viaje habilita
+                <strong>“Imprimir Ticket #02”</strong> → el camión vuelve al banco
+                y descarga → al regresar registras el <strong>Viaje 2</strong>… así
+                hasta terminar la jornada. En material de descarga,
+                <strong>tickets y viajes deben quedar iguales</strong>.
+              </div>
+            </div>
+
+            <div class="telefono">
+              <div class="telefono__muesca"></div>
+              <video
+                class="telefono__video"
+                controls
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                src="videos/renta-checador-paso-3.mp4"
+              ></video>
+              <p class="telefono__placeholder">Video: registrar viaje</p>
+            </div>
+          </div>
+
+          <div class="modal__pie">
+            <button type="button" class="modal__boton" data-cerrar>
+              <i class="mdi mdi-arrow-left"></i> Volver a la guía
+            </button>
+            <button type="button" class="modal__boton modal__boton--siguiente" data-siguiente>
+              Siguiente paso <i class="mdi mdi-arrow-right"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- ---------- PASO: COMPLETAR (Paso 5) — último, sin "siguiente" ---------- -->
+        <article class="modal__paso" data-paso="completar">
+          <span class="modal__etiqueta">Paso 5 · Para checadores</span>
+          <h2 class="modal__titulo">
+            <i class="mdi mdi-check-circle"></i> Completa y cierra el vale
+          </h2>
+          <div class="modal__cuerpo">
+            <div class="modal__texto">
+              <ul class="paso__lista">
+                <li>
+                  En <strong>“Completar Vale”</strong>, elige
+                  <strong>“Renta por día completo”</strong>,
+                  <strong>“Renta por medio día”</strong>, o captura la
+                  <strong>“Hora de Fin”</strong>.
+                </li>
+                <li>Agrega <strong>“Notas (opcional)”</strong> si hace falta.</li>
+                <li>
+                  Toma la <strong>evidencia</strong> (foto + ubicación). Es
+                  <strong>obligatoria</strong>.
+                </li>
+                <li>Toca el botón verde <strong>“Completar Vale”</strong>.</li>
+              </ul>
+
+              <div class="nota nota--alerta">
+                <i class="mdi mdi-alert"></i>
+                Si es material de descarga y los <strong>tickets no coinciden con
+                los viajes</strong>, el botón queda bloqueado hasta emparejarlos.
+              </div>
+
+              <div class="nota">
+                <i class="mdi mdi-check-circle"></i>
+                Al completar verás <strong>“Vale Completado”</strong>: queda
+                <strong>emitido</strong>. Genera el <strong>PDF</strong> e imprime
+                el <strong>ticket físico</strong> para cerrarlo del todo.
+              </div>
+            </div>
+
+            <div class="telefono">
+              <div class="telefono__muesca"></div>
+              <video
+                class="telefono__video"
+                controls
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                src="videos/renta-checador-paso-5.mp4"
+              ></video>
+              <p class="telefono__placeholder">Video: completar vale</p>
+            </div>
+          </div>
+
+          <div class="modal__pie">
+            <button type="button" class="modal__boton" data-cerrar>
+              <i class="mdi mdi-arrow-left"></i> Volver a la guía
+            </button>
+            <!-- Último paso: en vez de "siguiente", un botón verde que cierra. -->
+            <button type="button" class="modal__boton modal__boton--fin" data-cerrar>
+              <i class="mdi mdi-check"></i> ¡Listo! Terminar
+            </button>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- PIE DE PÁGINA --------------------------------------------------- -->
+    <footer class="pie">
+      <div class="contenedor">Control de Acarreos · Centro de Ayuda</div>
+    </footer>
+
+    <!-- Lógica del modal: abrir al tocar un paso, cerrar, y "siguiente paso". -->
+    <script src="js/guia-modales.js" defer></script>
+  </body>
+</html>

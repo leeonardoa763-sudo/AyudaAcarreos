@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!--
+  index.html — Portada (menú) del sitio de Ayuda.
+
+  IDEA DE ESTA PÁGINA: no mostrar pasos todavía. Solo preguntar
+  "¿qué quieres ver?" con CUATRO botones grandes. Al tocar uno, el navegador
+  va a la guía de ese tipo de vale, y ahí sí aparecen los pasos.
+
+  Por qué separar así:
+  - Menos ruido: el usuario nuevo no se abruma con todos los procesos juntos.
+  - Cada tipo de vale (material, renta, pipa, asfáltico) tiene su propio flujo;
+    mezclarlos en una sola página confundía.
+
+  La navegación se hace con <a href="..."> (enlaces normales), NO con
+  JavaScript: es lo más simple y funciona siempre, incluso sin JS.
+-->
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ayuda — Control de Acarreos</title>
+
+    <!-- Fuente de iconos "Material Design Icons". Es EXACTAMENTE el mismo set
+         que usa la app (MaterialCommunityIcons), así que <i class="mdi mdi-truck"></i>
+         da el mismo dibujo. Antes venía de un CDN (723 KB para usar 54 iconos);
+         ahora css/iconos.css trae SOLO los que este sitio usa (8 KB) y se sirve
+         desde nuestro propio servidor, así que no depende de que el CDN responda. -->
+    <link rel="stylesheet" href="css/iconos.css" />
+
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+
+  <body>
+    <!-- ENCABEZADO ------------------------------------------------------ -->
+    <header class="encabezado">
+      <div class="contenedor">
+        <h1 class="encabezado__titulo">Centro de Ayuda</h1>
+        <p class="encabezado__subtitulo">
+          Control de Acarreos — aprende a usar la app paso a paso
+        </p>
+      </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL --------------------------------------------- -->
+    <main class="principal">
+      <div class="contenedor">
+        <div class="intro">
+          <h2 class="intro__titulo">
+            <i class="mdi mdi-gesture-tap-button"></i> ¿Qué quieres ver?
+          </h2>
+          <p>
+            Elige el <strong>tipo de vale</strong> con el que vas a trabajar.
+            Adentro encontrarás sus pasos, con video y explicación.
+          </p>
+        </div>
+
+        <!-- MENÚ DE 4 BOTONES GRANDES ---------------------------------------
+             Cada botón es un <a> (un enlace) al que el CSS le da aspecto de
+             tarjeta grande. El bloque .menu usa CSS Grid: en pantalla ancha
+             salen 2 por fila; en celular, uno debajo del otro. -->
+        <nav class="menu">
+          <!-- 1) MATERIAL (FLETE) -->
+          <a class="menu__boton menu__boton--material" href="guia-material.html">
+            <span class="menu__icono"><i class="mdi mdi-truck"></i></span>
+            <span class="menu__texto">
+              <span class="menu__titulo">Material (Flete)</span>
+              <span class="menu__desc">
+                Acarreo de material pagado por viaje: base, arena, grava…
+              </span>
+            </span>
+            <i class="mdi mdi-chevron-right menu__flecha"></i>
+          </a>
+
+          <!-- 2) RENTA DE CAMIÓN -->
+          <a
+            class="menu__boton menu__boton--renta"
+            href="guia-renta-camion.html"
+          >
+            <span class="menu__icono"><i class="mdi mdi-dump-truck"></i></span>
+            <span class="menu__texto">
+              <span class="menu__titulo">Renta de Camión</span>
+              <span class="menu__desc">
+                Equipo rentado por tiempo: del vale inicial al cierre del turno.
+              </span>
+            </span>
+            <i class="mdi mdi-chevron-right menu__flecha"></i>
+          </a>
+
+          <!-- 3) RENTA DE PIPA -->
+          <a class="menu__boton menu__boton--pipa" href="guia-renta-pipa.html">
+            <span class="menu__icono"><i class="mdi mdi-tanker-truck"></i></span>
+            <span class="menu__texto">
+              <span class="menu__titulo">Renta de Pipa</span>
+              <span class="menu__desc">
+                Pipas de agua rentadas por tiempo, con sus viajes de llenado.
+              </span>
+            </span>
+            <i class="mdi mdi-chevron-right menu__flecha"></i>
+          </a>
+
+          <!-- 4) FLETE ASFÁLTICO -->
+          <a
+            class="menu__boton menu__boton--asfaltico"
+            href="guia-asfaltico.html"
+          >
+            <span class="menu__icono"><i class="mdi mdi-road-variant"></i></span>
+            <span class="menu__texto">
+              <span class="menu__titulo">Flete Asfáltico</span>
+              <span class="menu__desc">
+                Acarreo de mezcla asfáltica, con su ticket de planta.
+              </span>
+            </span>
+            <i class="mdi mdi-chevron-right menu__flecha"></i>
+          </a>
+        </nav>
+      </div>
+    </main>
+
+    <!-- PIE DE PÁGINA --------------------------------------------------- -->
+    <footer class="pie">
+      <div class="contenedor">Control de Acarreos · Centro de Ayuda</div>
+    </footer>
+  </body>
+</html>

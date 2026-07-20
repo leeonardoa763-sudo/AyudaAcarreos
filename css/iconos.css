@@ -1,0 +1,99 @@
+/*
+  iconos.css — Fuente de iconos Material Design Icons, RECORTADA.
+
+  ARCHIVO GENERADO: NO EDITAR A MANO.
+  Se regenera con:  python herramientas/generar-iconos.py
+  (correlo cada vez que agregues un icono nuevo al sitio, o no se vera)
+
+  Antes estos iconos venian del CDN de jsDelivr: 338 KB de CSS + 394 KB de
+  fuente = 723 KB, para usar solo 54 de los 7447 iconos que trae MDI.
+  Este archivo trae UNICAMENTE esos 54, y se sirve desde nuestro propio Vercel:
+
+    1. Pesa ~99% menos.
+    2. Ya no depende de que el CDN responda. En obra, con senal mala, antes se
+       corria el riesgo de que la pagina se quedara sin ningun icono.
+
+  Basado en @mdi/font v7.4.47 (licencia Apache 2.0 / SIL OFL 1.1).
+*/
+
+@font-face {
+  font-family: "Material Design Icons";
+  src: url("iconos.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  /* Mientras la fuente carga, muestra el texto con una fuente de respaldo en
+     vez de dejar un hueco en blanco. */
+  font-display: swap;
+}
+
+/* Clase base: la que convierte un <i> en un icono.
+   Copia fiel de la regla base del MDI original. Los dos "inherit" NO son
+   opcionales: sin ellos el icono se queda clavado en 24px y deja de obedecer
+   al font-size que le pone estilos.css (p.ej. .paso__titulo .mdi). */
+.mdi::before,
+.mdi-set {
+  display: inline-block;
+  font: normal normal normal 24px/1 "Material Design Icons";
+  font-size: inherit;
+  line-height: inherit;
+  text-rendering: auto;
+  /* Suaviza el dibujo del icono. */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Un icono por regla: el "content" es el codigo del dibujo dentro de la fuente. */
+.mdi-account-group::before { content: "\F0849"; }
+.mdi-alert::before { content: "\F0026"; }
+.mdi-arrow-left::before { content: "\F004D"; }
+.mdi-arrow-right::before { content: "\F0054"; }
+.mdi-calculator::before { content: "\F00EC"; }
+.mdi-calendar-remove::before { content: "\F00F4"; }
+.mdi-camera::before { content: "\F0100"; }
+.mdi-cash-multiple::before { content: "\F0116"; }
+.mdi-cash-sync::before { content: "\F1A92"; }
+.mdi-check::before { content: "\F012C"; }
+.mdi-check-circle::before { content: "\F05E0"; }
+.mdi-chevron-right::before { content: "\F0142"; }
+.mdi-clipboard-check::before { content: "\F014E"; }
+.mdi-clock-alert-outline::before { content: "\F05CE"; }
+.mdi-clock-outline::before { content: "\F0150"; }
+.mdi-content-copy::before { content: "\F018F"; }
+.mdi-cube-outline::before { content: "\F01A7"; }
+.mdi-cube-scan::before { content: "\F0B84"; }
+.mdi-dump-truck::before { content: "\F0C67"; }
+.mdi-factory::before { content: "\F020F"; }
+.mdi-file-document-outline::before { content: "\F09EE"; }
+.mdi-file-document-plus::before { content: "\F1A9D"; }
+.mdi-file-pdf-box::before { content: "\F0226"; }
+.mdi-gesture-tap-button::before { content: "\F12A8"; }
+.mdi-help-circle::before { content: "\F02D7"; }
+.mdi-help-circle-outline::before { content: "\F0625"; }
+.mdi-home::before { content: "\F02DC"; }
+.mdi-information::before { content: "\F02FC"; }
+.mdi-information-outline::before { content: "\F02FD"; }
+.mdi-magnify-plus-outline::before { content: "\F06ED"; }
+.mdi-map-marker-distance::before { content: "\F08F0"; }
+.mdi-map-marker-off::before { content: "\F0351"; }
+.mdi-map-marker-path::before { content: "\F0D20"; }
+.mdi-office-building-marker::before { content: "\F1520"; }
+.mdi-play-circle::before { content: "\F040C"; }
+.mdi-plus-circle::before { content: "\F0417"; }
+.mdi-printer::before { content: "\F042A"; }
+.mdi-printer-check::before { content: "\F1146"; }
+.mdi-printer-pos::before { content: "\F1057"; }
+.mdi-progress-clock::before { content: "\F0996"; }
+.mdi-qrcode::before { content: "\F0432"; }
+.mdi-qrcode-scan::before { content: "\F0433"; }
+.mdi-receipt-text-outline::before { content: "\F19DC"; }
+.mdi-refresh::before { content: "\F0450"; }
+.mdi-road-variant::before { content: "\F0462"; }
+.mdi-shield-account::before { content: "\F088F"; }
+.mdi-swap-horizontal::before { content: "\F04E1"; }
+.mdi-tanker-truck::before { content: "\F0FE5"; }
+.mdi-truck::before { content: "\F053D"; }
+.mdi-truck-fast::before { content: "\F0788"; }
+.mdi-truck-plus::before { content: "\F19AD"; }
+.mdi-weather-night::before { content: "\F0594"; }
+.mdi-web::before { content: "\F059F"; }
+.mdi-wifi-off::before { content: "\F05AA"; }

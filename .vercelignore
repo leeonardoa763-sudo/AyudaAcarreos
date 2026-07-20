@@ -1,0 +1,13 @@
+# Cosas que NO deben subir al sitio publico.
+# Vercel despliega esta carpeta tal cual, asi que todo lo que no sea parte del
+# sitio hay que excluirlo aqui o termina publicado y ocupando espacio.
+
+# Script para regenerar la fuente de iconos + su cache de 394 KB.
+# Es una herramienta de desarrollo: no la necesita nadie que visite el sitio.
+herramientas/
+
+# Entorno de Python, si lo creaste aqui para correr ese script.
+.venv/
+
+# Notas para Claude Code, no son parte del sitio.
+CLAUDE.md

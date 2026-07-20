@@ -1,0 +1,14 @@
+# Normaliza los finales de linea.
+#
+# Windows termina las lineas con CRLF y Linux/Mac con LF. Sin este archivo, git
+# convierte al vuelto y el mismo archivo aparece como "modificado" en otra
+# maquina aunque nadie lo haya tocado. Con "eol=lf" el repo guarda SIEMPRE LF.
+* text=auto eol=lf
+
+# Estos son binarios: git no debe tocarlos ni intentar mostrar diferencias
+# linea por linea (no tiene sentido en un video o una fuente).
+*.mp4   binary
+*.woff2 binary
+*.jpg   binary
+*.jpeg  binary
+*.png   binary

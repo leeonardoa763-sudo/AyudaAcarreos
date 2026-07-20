@@ -1,0 +1,1384 @@
+/* ============================================================================
+   estilos.css  —  Estilos compartidos del sitio de Ayuda (Control de Acarreos)
+
+   Este archivo lo van a USAR TODAS las páginas (index.html, las lecciones, etc.).
+   La idea es escribir los estilos UNA sola vez aquí y "enlazarlos" desde cada
+   HTML con:  <link rel="stylesheet" href="css/estilos.css">
+
+   Se lee de arriba hacia abajo. Cada sección está comentada para que entiendas
+   el porqué, no solo el qué.
+   ============================================================================ */
+
+
+/* ----------------------------------------------------------------------------
+   1) VARIABLES DE COLOR (la "paleta")
+
+   :root es el elemento más alto del documento (el <html>). Cuando declaras
+   variables aquí, quedan disponibles en TODA la página. Una variable de CSS se
+   escribe con dos guiones al inicio (--nombre) y se usa con var(--nombre).
+
+   Ventaja: si algún día quieres cambiar el naranja, lo cambias en UN solo lugar
+   y se actualiza en todo el sitio. Estos son los mismos colores oficiales de la
+   app, para que la ayuda se sienta parte del mismo producto.
+   ---------------------------------------------------------------------------- */
+:root {
+  --color-primary: #ff6b35;      /* Naranja: acciones y acentos principales    */
+  --color-secondary: #004e89;    /* Azul: encabezados y énfasis                */
+  --color-accent: #1a936f;       /* Verde: estados positivos / "éxito"         */
+  --color-surface: #ffffff;      /* Blanco: fondo de las tarjetas              */
+  --color-background: #f5f6fa;   /* Gris muy claro: fondo general de la página */
+  --color-text: #2c3e50;         /* Texto principal (casi negro azulado)       */
+  --color-text-soft: #7f8c8d;    /* Texto secundario (gris)                    */
+  --color-border: #e3e6ec;       /* Líneas y bordes suaves                     */
+
+  /* Un radio de borde y una sombra reutilizables, para no repetir números. */
+  --radio: 14px;
+  --sombra: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+
+/* ----------------------------------------------------------------------------
+   2) "RESET" BÁSICO
+
+   Los navegadores traen márgenes y rellenos por defecto que estorban. Aquí los
+   ponemos en cero y activamos box-sizing: border-box, que hace que el padding y
+   el borde NO aumenten el ancho de los elementos (mucho más fácil de calcular).
+
+   El selector *  significa "todos los elementos".
+   ---------------------------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* ----------------------------------------------------------------------------
+   3) ESTILOS BASE DEL DOCUMENTO
+
+   Aquí definimos la tipografía, el color de fondo y el color de texto que
+   heredará todo lo demás. La lista de fuentes (font-family) es una "cascada":
+   el navegador usa la primera que tenga instalada; -apple-system y "Segoe UI"
+   son las fuentes nativas de iPhone/Mac y de Windows, así se ve nítido sin
+   descargar nada.
+   ---------------------------------------------------------------------------- */
+body {
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.6;              /* Espacio entre renglones: mejora la lectura. */
+  -webkit-font-smoothing: antialiased; /* Texto más suave en pantallas Apple.   */
+}
+
+/* Que las imágenes y videos nunca se salgan de su contenedor. */
+img,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* ----------------------------------------------------------------------------
+   4) CONTENEDOR CENTRAL
+
+   .contenedor limita el ancho del contenido y lo centra. margin: 0 auto
+   significa "0 arriba/abajo, automático a los lados" -> centrado horizontal.
+   El padding lateral evita que el texto toque el borde en pantallas chicas.
+   ---------------------------------------------------------------------------- */
+.contenedor {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+
+/* ----------------------------------------------------------------------------
+   5) ENCABEZADO (la barra azul de arriba)
+
+   Usamos un degradado (linear-gradient) entre el azul y una versión más oscura
+   para que se vea con más profundidad que un color plano.
+   ---------------------------------------------------------------------------- */
+.encabezado {
+  background: linear-gradient(135deg, var(--color-secondary), #00365f);
+  color: var(--color-surface);
+  padding: 28px 0;
+  box-shadow: var(--sombra);
+}
+
+.encabezado__titulo {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.encabezado__subtitulo {
+  font-size: 1rem;
+  opacity: 0.9;                  /* Un poco transparente = jerarquía visual.    */
+  margin-top: 4px;
+}
+
+/* Un "chip" o etiqueta pequeña para indicar el rol (ej. "Para Residentes"). */
+.chip {
+  display: inline-block;
+  background: var(--color-primary);
+  color: var(--color-surface);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;          /* 999px = pastilla totalmente redondeada.     */
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
+/* ----------------------------------------------------------------------------
+   6) SECCIÓN PRINCIPAL Y TÍTULOS INTERNOS
+   ---------------------------------------------------------------------------- */
+.principal {
+  padding: 32px 0 64px;          /* Aire arriba y bastante espacio abajo.       */
+}
+
+.intro {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 5px solid var(--color-primary); /* Barra naranja de acento.      */
+  border-radius: var(--radio);
+  padding: 20px 22px;
+  margin-bottom: 28px;
+  box-shadow: var(--sombra);
+}
+
+.intro__titulo {
+  color: var(--color-secondary);
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+}
+
+
+/* ----------------------------------------------------------------------------
+   7) TARJETA DE PASO
+
+   Cada paso del tutorial es una "tarjeta". Dentro tiene dos columnas:
+   - a la izquierda el texto (número, título, instrucciones)
+   - a la derecha el video
+
+   display: flex pone a los hijos en fila (uno al lado del otro).
+   gap es el espacio ENTRE ellos. flex-wrap: wrap permite que, si no caben,
+   bajen a la siguiente línea (clave para pantallas chicas).
+   ---------------------------------------------------------------------------- */
+.paso {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 24px;
+  margin-bottom: 24px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-start;       /* Alinea ambas columnas arriba.               */
+}
+
+/* Columna de texto: flex: 1 hace que "crezca" y ocupe el espacio disponible.
+   min-width evita que se aplaste demasiado antes de bajar el video debajo. */
+.paso__texto {
+  flex: 1;
+  min-width: 260px;
+}
+
+/* Número del paso: un círculo naranja con el dígito adentro. */
+.paso__numero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-surface);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.paso__titulo {
+  color: var(--color-secondary);
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+  /* Alinea el icono y el texto en la misma línea, centrados verticalmente. */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Los iconos de los títulos van en naranja para que resalten. .mdi es la clase
+   que trae la fuente de iconos; aquí solo les damos color y tamaño. */
+.paso__titulo .mdi {
+  color: var(--color-primary);
+  font-size: 1.4rem;
+}
+
+/* Icono del título de la intro (azul, combina con el texto azul). */
+.intro__titulo .mdi {
+  color: var(--color-primary);
+}
+
+/* Lista de instrucciones. Le damos espacio a la izquierda para que se vean
+   las viñetas/números, y aire entre cada instrucción. */
+.paso__lista {
+  padding-left: 20px;
+}
+
+.paso__lista li {
+  margin-bottom: 8px;
+}
+
+/* Párrafo introductorio dentro de un paso (va antes de la lista de pasos).
+   Como el "reset" del inicio pone los márgenes en 0, aquí le devolvemos un poco
+   de aire por debajo para que no quede pegado a la lista. */
+.paso__parrafo {
+  margin-bottom: 10px;
+}
+
+/* Un recuadro de "tip" o nota dentro de un paso (verde suave). */
+.nota {
+  background: #eafaf3;
+  border-left: 4px solid var(--color-accent);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  margin-top: 14px;
+}
+
+/* Icono dentro de una nota normal: verde, como su barra. */
+.nota .mdi {
+  color: var(--color-accent);
+  margin-right: 4px;
+}
+
+/* Variante de ALERTA (avisos de "cuidado, si te equivocas..."). Usa el naranja
+   del proyecto en vez del verde, para diferenciarla de una nota informativa. */
+.nota--alerta {
+  background: #fff4e6;
+  border-left-color: var(--color-primary);
+}
+
+.nota--alerta .mdi {
+  color: var(--color-primary);
+}
+
+
+/* ----------------------------------------------------------------------------
+   8) MARCO DE TELÉFONO PARA EL VIDEO
+
+   Los videos que se graban desde el celular son VERTICALES (más altos que
+   anchos). Si los dejáramos sueltos se verían enormes. Aquí los metemos en un
+   "marco" con ancho fijo controlado, bordes redondeados y una franja arriba que
+   simula la parte superior de un teléfono.
+   ---------------------------------------------------------------------------- */
+.telefono {
+  width: 260px;
+  flex-shrink: 0;                /* No dejar que el marco se encoja.            */
+  background: #111;
+  border-radius: 26px;
+  padding: 12px;
+  box-shadow: var(--sombra);
+  margin: 0 auto;                /* Centrado cuando queda solo en móvil.        */
+}
+
+/* La "muesca" superior (la barrita del bocina/cámara) es puramente decorativa. */
+.telefono__muesca {
+  width: 60px;
+  height: 5px;
+  background: #444;
+  border-radius: 999px;
+  margin: 2px auto 10px;
+}
+
+/* El video en sí, con esquinas redondeadas para que "encaje" en el marco.
+   aspect-ratio 9/16 reserva el espacio vertical típico de un celular, así el
+   marco no "salta" de tamaño mientras el video carga. */
+.telefono__video {
+  width: 100%;
+  /* aspect-ratio = la FORMA del hueco del video (ancho / alto). Subimos el
+     segundo número (antes 16, ahora 18) para alargar el marco en vertical.
+     Si tu grabación se ve con mucho borde negro arriba/abajo, baja ese 18;
+     si se ve apretada, súbelo. Es el único número que hay que tocar. */
+  aspect-ratio: 9 / 18;
+  /* contain = muestra el video COMPLETO sin recortar nada (clave en un
+     tutorial: no queremos perder botones de la app). Lo que sobre se rellena
+     con el fondo negro, como el marco de un teléfono real. */
+  object-fit: contain;
+  border-radius: 16px;
+  background: #000;
+}
+
+/* Texto pequeño debajo del video mientras aún no hay grabación real. */
+.telefono__placeholder {
+  color: #bbb;
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 8px;
+}
+
+
+/* ----------------------------------------------------------------------------
+   9) RESULTADO FINAL (tarjeta verde de "¡Listo!")
+   ---------------------------------------------------------------------------- */
+.resultado {
+  /* display:block + text-decoration:none hacen que un <a> se vea como una
+     tarjeta y no como un enlace subrayado. */
+  display: block;
+  text-decoration: none;
+  background: linear-gradient(135deg, var(--color-accent), #14795a);
+  color: var(--color-surface);
+  border-radius: var(--radio);
+  padding: 26px;
+  box-shadow: var(--sombra);
+  text-align: center;
+  /* transition: para que el efecto al pasar el cursor sea suave (igual que en
+     las tarjetas del inicio). */
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Al pasar el cursor, la tarjeta se levanta un poco: pista visual de que es
+   clickeable. */
+.resultado:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+.resultado__titulo {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+/* El "botón" blanco dentro de la tarjeta verde. En realidad es un <span>
+   (texto), no un <button>; el que navega es el <a> que lo envuelve. Aquí solo
+   le damos forma de pastilla para que INVITE a tocarlo. */
+.resultado__boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  background: var(--color-surface);
+  color: var(--color-accent);
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 999px;
+}
+
+
+/* ----------------------------------------------------------------------------
+   10) TARJETAS DEL HUB (portada index.html)
+
+   La portada muestra "botones" grandes para elegir a qué lección ir. Usamos
+   grid: repeat(auto-fit, minmax(240px, 1fr)) crea columnas automáticas que se
+   acomodan solas según el ancho disponible (2 o 3 por fila en escritorio, 1 en
+   móvil), sin necesidad de escribir media queries para esto.
+   ---------------------------------------------------------------------------- */
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+
+/* Cada tarjeta-enlace. text-decoration: none quita el subrayado del <a>. */
+.tarjeta {
+  display: block;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radio);
+  padding: 22px;
+  box-shadow: var(--sombra);
+  text-decoration: none;
+  color: var(--color-text);
+  /* transition suaviza el cambio al pasar el mouse (hover) en 0.15 segundos. */
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* :hover = cómo se ve cuando el mouse está encima. La levantamos un poco. */
+.tarjeta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+}
+
+.tarjeta--activa {
+  border-top: 4px solid var(--color-primary);
+}
+
+/* Tarjeta que aún no tiene lección lista: se ve apagada y no responde. */
+.tarjeta--proximamente {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.tarjeta__titulo {
+  color: var(--color-secondary);
+  font-size: 1.15rem;
+  margin-bottom: 6px;
+}
+
+.tarjeta__texto {
+  color: var(--color-text-soft);
+  font-size: 0.95rem;
+}
+
+.etiqueta-proximamente {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
+/* ----------------------------------------------------------------------------
+   11) ENLACE "VOLVER" Y PIE DE PÁGINA
+   ---------------------------------------------------------------------------- */
+.volver {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: var(--color-secondary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.volver:hover {
+  text-decoration: underline;
+}
+
+.pie {
+  text-align: center;
+  color: var(--color-text-soft);
+  font-size: 0.85rem;
+  padding: 30px 0;
+}
+
+
+/* ----------------------------------------------------------------------------
+   BLOQUE "SABER MÁS" (acordeón nativo con <details>)
+
+   <details> + <summary> son etiquetas de HTML que hacen un desplegable SIN
+   JavaScript: el navegador muestra solo el <summary> (un "botón") y, al hacer
+   clic, revela el resto. Lo usamos para explicaciones opcionales dentro de un
+   paso (ej. "¿Qué es una requisición?") sin llenar la pantalla de texto.
+   ---------------------------------------------------------------------------- */
+.saber-mas {
+  margin-top: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-background);
+  overflow: hidden;              /* Recorta las esquinas del contenido interno. */
+}
+
+/* El <summary> es la parte SIEMPRE visible; le damos aspecto de botón. */
+.saber-mas__boton {
+  cursor: pointer;
+  list-style: none;              /* Oculta la flechita por defecto (Firefox).   */
+  padding: 10px 14px;
+  font-weight: 600;
+  color: var(--color-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Oculta el triangulito por defecto también en Chrome/Safari. */
+.saber-mas__boton::-webkit-details-marker {
+  display: none;
+}
+
+.saber-mas__boton .mdi {
+  color: var(--color-primary);
+}
+
+/* El contenido que se revela al abrir el desplegable. */
+.saber-mas__contenido {
+  padding: 0 14px 14px;
+  font-size: 0.92rem;
+}
+
+/* La imagen de ejemplo dentro del desplegable. */
+.saber-mas__img {
+  margin-top: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+
+
+/* ----------------------------------------------------------------------------
+   12) RESPONSIVO (pantallas chicas: celulares)
+
+   Una "media query" aplica reglas SOLO cuando se cumple la condición. Aquí:
+   "cuando el ancho de la pantalla sea 640px o menos". En esos casos hacemos que
+   el marco del teléfono ocupe todo el ancho y quede centrado debajo del texto
+   (recuerda que .paso ya baja el video solo gracias a flex-wrap).
+   ---------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .encabezado__titulo {
+    font-size: 1.35rem;
+  }
+
+  .telefono {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .paso {
+    padding: 18px;
+  }
+}
+
+
+/* ============================================================================
+   13) MAPA / "RUTA" DEL PROCESO  (portada index.html)
+
+   La portada ahora muestra el proceso completo como un CAMINO de paradas
+   numeradas, en vertical (como una línea de tiempo). Cada parada que lleva a
+   una lección es un <a> (enlace). En medio del camino hay dos nodos especiales
+   que NO son enlaces: el "viaje al banco" (con el camión animado) y el "ciclo".
+
+   ¿Por qué vertical? Porque se apila solo en el celular sin pelearnos con el
+   ancho: en pantalla ancha se ve como una columna centrada; en móvil, igual.
+   ---------------------------------------------------------------------------- */
+
+/* Título de la sección del mapa. */
+.ruta-titulo {
+  color: var(--color-secondary);
+  font-size: 1.25rem;
+  margin: 30px 0 6px;
+}
+
+/* Contenedor del camino. position: relative para poder dibujar DETRÁS de las
+   paradas una línea vertical continua (el "riel" del camino) con ::before. */
+.ruta {
+  position: relative;
+  margin-top: 20px;
+}
+
+/* El riel: una línea vertical que une todas las paradas. La colocamos a la
+   altura del centro de las insignias (los círculos numerados). Va detrás de
+   todo (z-index bajo) para que las insignias la tapen y parezca que "pasa por
+   dentro" de ellas. */
+.ruta::before {
+  content: "";
+  position: absolute;
+  left: 27px;                    /* centro de la insignia (56px / 2 ≈ 28) */
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  background: var(--color-border);
+  border-radius: 999px;
+  z-index: 0;
+}
+
+/* Una parada del camino. Es una fila: [insignia] [tarjeta de texto].
+   gap = espacio entre la insignia y la tarjeta. align-items: stretch hace que
+   la tarjeta y la insignia tengan la misma altura. */
+.ruta__parada,
+.ruta__viaje,
+.ruta__ciclo {
+  position: relative;
+  z-index: 1;                    /* por encima del riel */
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* La insignia redonda de cada nodo (número, camión o ciclo). flex-shrink: 0
+   evita que se aplaste. El borde blanco grueso hace que "corte" el riel y se
+   vea que el camino pasa por dentro. */
+.ruta__num {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-surface);
+  background: var(--color-primary);
+  border: 4px solid var(--color-background);
+  box-shadow: var(--sombra);
+}
+
+/* Insignia azul para los pasos del checador (para distinguir del residente). */
+.ruta__num--checador {
+  background: var(--color-secondary);
+}
+
+/* Insignias de los nodos especiales (camión y ciclo): verdes, con icono. */
+.ruta__num--viaje,
+.ruta__num--ciclo {
+  background: var(--color-accent);
+}
+
+.ruta__num .mdi {
+  font-size: 1.6rem;
+}
+
+/* La tarjeta de texto de la parada. Como algunas paradas son <a>, quitamos el
+   subrayado y heredamos el color del texto. flex: 1 para que ocupe el resto. */
+.ruta__contenido {
+  flex: 1;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radio);
+  padding: 16px 18px;
+  box-shadow: var(--sombra);
+  text-decoration: none;
+  color: var(--color-text);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Las paradas que se pueden tocar (los pasos del checador ahora son <button>,
+   y el paso del residente sigue siendo un <a>) "se levantan" al pasar el cursor:
+   es la pista de que abren algo. */
+a.ruta__parada:hover .ruta__contenido,
+button.ruta__parada:hover .ruta__contenido {
+  transform: translateX(4px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+}
+
+/* Un <a> que envuelve una parada no debe verse como enlace subrayado. */
+a.ruta__parada {
+  text-decoration: none;
+}
+
+/* Cuando la parada es un <button>, el navegador le pone estilos propios (fondo
+   gris, borde, tipografía distinta, texto centrado). Los quitamos TODOS para que
+   se vea idéntica a la parada-enlace. Un botón es lo correcto aquí porque no
+   navega a otra página: abre un modal en esta misma. */
+button.ruta__parada {
+  /* Quitar el "chrome" del botón. */
+  border: none;
+  background: none;
+  padding: 0;
+  margin-bottom: 16px;           /* mismo espaciado que las demás paradas */
+  /* Heredar la tipografía del texto normal (por defecto los botones usan otra). */
+  font: inherit;
+  color: inherit;
+  text-align: left;              /* el texto del botón se alinea al centro solo */
+  cursor: pointer;               /* manita: invita a tocar */
+  width: 100%;                   /* que ocupe todo el ancho, como las paradas <a> */
+}
+
+/* Etiqueta pequeña de rol (Residente / Checador) arriba del título. */
+.ruta__rol {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-primary);
+  margin-bottom: 2px;
+}
+
+.ruta__rol--checador {
+  color: var(--color-secondary);
+}
+
+.ruta__parada-titulo {
+  color: var(--color-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ruta__parada-titulo .mdi {
+  color: var(--color-primary);
+}
+
+.ruta__parada-texto {
+  color: var(--color-text-soft);
+  font-size: 0.92rem;
+}
+
+/* Flechita "ir" al final de la tarjeta-enlace, para invitar al clic. */
+.ruta__ir {
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+
+/* ----------------------------------------------------------------------------
+   13.1) NODO "VIAJE AL BANCO"  (solo texto)
+
+   Este nodo no es un enlace: es una tarjeta con texto que explica que el camión
+   sale de la obra al banco/lugar de descarga y regresa. Sin imágenes (la imagen
+   del ciclo vive en el nodo "Y se repite", más abajo).
+   ---------------------------------------------------------------------------- */
+.ruta__viaje-contenido {
+  flex: 1;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radio);
+  padding: 12px 14px;
+  box-shadow: var(--sombra);
+}
+
+.ruta__viaje-titulo {
+  color: var(--color-secondary);
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ruta__viaje-titulo .mdi {
+  color: var(--color-accent);
+}
+
+/* Texto del nodo de viaje (ya sin imagen). */
+.ruta__viaje-texto {
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+
+/* ----------------------------------------------------------------------------
+   13.2) NODO "CICLO"  (se repite: imprimir → viaja → registrar)
+   ---------------------------------------------------------------------------- */
+.ruta__ciclo-contenido {
+  flex: 1;
+  background: #eafaf3;
+  border: 1px dashed var(--color-accent);
+  border-radius: var(--radio);
+  padding: 12px 16px;
+  color: var(--color-text);
+  font-size: 0.92rem;
+}
+
+.ruta__ciclo-contenido strong {
+  color: var(--color-accent);
+}
+
+/* La imagen del "Ciclo de renta" dentro de este nodo. Va al ancho completo,
+   sobre fondo blanco y con esquinas redondeadas, separada del texto de arriba. */
+.ruta__ciclo-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 12px;
+  border-radius: 10px;
+  background: #fff;
+}
+
+
+/* ----------------------------------------------------------------------------
+   13.3) "OTRAS LECCIONES"  (enlaces compactos que sustituyen a las tarjetas
+   que quitamos: crear vale de material y asfáltico siguen accesibles).
+   ---------------------------------------------------------------------------- */
+.otras {
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.otras__titulo {
+  color: var(--color-secondary);
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+.otras__lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Cada "otra lección" es un enlace en forma de pastilla. */
+.otras__enlace {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: var(--sombra);
+  transition: transform 0.15s ease;
+}
+
+.otras__enlace:hover {
+  transform: translateY(-2px);
+}
+
+.otras__enlace .mdi {
+  color: var(--color-primary);
+  font-size: 1.2rem;
+}
+
+
+/* ----------------------------------------------------------------------------
+   13.4) RESPONSIVO del mapa (celulares)
+   ---------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  /* Insignias un poco más chicas y riel ajustado a su nuevo centro. */
+  .ruta__num {
+    width: 46px;
+    height: 46px;
+    font-size: 1.2rem;
+  }
+
+  .ruta::before {
+    left: 22px;                  /* 46px / 2 ≈ 23 */
+  }
+
+  .ruta__parada,
+  .ruta__viaje,
+  .ruta__ciclo {
+    gap: 12px;
+  }
+}
+
+
+/* ============================================================================
+   14) MODAL DE PASO  (guía del checador, portada index.html)
+
+   La idea: en el mapa, tocar un paso del checador NO te manda a otra página;
+   abre una ventanita flotante (un "modal") ENCIMA del mapa con SOLO ese paso.
+   Al cerrar vuelves a la guía justo donde estabas. Así se ve un paso a la vez,
+   más ordenado.
+
+   Piezas:
+   - .modal-fondo  = la capa oscura que cubre toda la pantalla (el "telón").
+   - .modal        = la tarjeta blanca centrada con el contenido del paso.
+   - .modal__paso  = el contenido de UN paso. Hay varios en el HTML, pero el
+                     JavaScript deja visible solo el que tocaste.
+
+   Cómo se muestra/oculta: el .modal-fondo tiene el atributo HTML `hidden` cuando
+   está cerrado (el navegador lo esconde solo). El JS quita/pone ese atributo.
+   ---------------------------------------------------------------------------- */
+
+/* El telón que cubre la pantalla. position: fixed lo ancla a la ventana (no se
+   mueve con el scroll). inset: 0 = pegado a los 4 bordes. z-index alto para que
+   quede por encima de TODO. Usamos flex para centrar la tarjeta. */
+.modal-fondo {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.55);   /* negro semitransparente: oscurece el fondo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;                     /* aire en los bordes para que respire en móvil */
+  /* overflow-y: auto permite hacer scroll DENTRO del telón si el paso es alto. */
+  overflow-y: auto;
+}
+
+/* IMPORTANTE: cuando el modal tiene el atributo `hidden`, debe quedar OCULTO.
+   Ojo con esto: el `display: flex` de arriba le gana al `hidden` del navegador
+   (los estilos que escribimos nosotros pesan más que los del navegador). Por eso
+   hay que apagarlo A MANO aquí. El selector `.modal-fondo[hidden]` es más
+   específico que `.modal-fondo` solo, así que este `display: none` gana cuando
+   el atributo está presente. */
+.modal-fondo[hidden] {
+  display: none;
+}
+
+/* La tarjeta blanca. max-width para que no se estire demasiado en pantallas
+   anchas; width 100% para que se ajuste sola en móvil. max-height + overflow
+   hacen que, si el contenido es muy largo, el scroll sea dentro de la tarjeta. */
+.modal {
+  position: relative;
+  background: var(--color-surface);
+  border-radius: var(--radio);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 26px;
+}
+
+/* La "X" para cerrar, arriba a la derecha de la tarjeta. */
+.modal__cerrar {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: var(--color-background);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-text);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal__cerrar:hover {
+  background: var(--color-border);
+}
+
+/* Cada paso dentro del modal. Por defecto lo escondemos; el JS le pone la clase
+   .modal__paso--activo al que hay que mostrar. Así solo se ve uno a la vez. */
+.modal__paso {
+  display: none;
+}
+.modal__paso--activo {
+  display: block;
+}
+
+/* Etiqueta chica "Paso 2 · Para checadores" arriba del título del paso. */
+.modal__etiqueta {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-secondary);
+  background: var(--color-background);
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+
+/* Título del paso dentro del modal (reusa el look de los títulos de paso). */
+.modal__titulo {
+  color: var(--color-secondary);
+  font-size: 1.3rem;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.modal__titulo .mdi {
+  color: var(--color-primary);
+}
+
+/* El cuerpo del paso: en pantalla ancha, texto a la izquierda y teléfono a la
+   derecha (como en las lecciones). En móvil se apilan solos con flex-wrap. */
+.modal__cuerpo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+}
+.modal__texto {
+  flex: 1;
+  min-width: 240px;              /* si no cabe junto al teléfono, baja solo */
+}
+
+/* VARIANTE dentro de un mismo paso ------------------------------------------
+   Hasta ahora cada paso tenía UN solo camino. En la guía de material, el paso
+   "Registrar el viaje" se captura distinto según el material del vale (pétreo
+   o producto de corte), así que ese paso lleva DOS bloques seguidos.
+
+   Sin esto los dos bloques se leerían pegados, como si fueran instrucciones
+   consecutivas del mismo camino — justo el malentendido que hay que evitar.
+   La barra de color a la izquierda los separa y los agrupa visualmente: todo
+   lo que está dentro de la barra naranja es pétreo, lo de la verde es corte.
+   Son los mismos colores de los chips "Solo pétreo" / "Solo corte". */
+.modal__variante {
+  border-left: 4px solid var(--color-border);
+  padding-left: 16px;
+  margin: 24px 0;
+}
+
+.modal__variante--petreo {
+  border-left-color: var(--color-primary);   /* naranja, igual que el chip */
+}
+
+.modal__variante--corte {
+  border-left-color: var(--color-accent);    /* verde, igual que el chip */
+}
+
+/* El pie del modal: los botones para volver a la guía y pasar al siguiente. */
+.modal__pie {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Botón base del pie. */
+.modal__boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: inherit;
+  font-weight: 700;
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: 2px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+}
+.modal__boton:hover {
+  border-color: var(--color-secondary);
+  color: var(--color-secondary);
+}
+
+/* Botón "Siguiente paso": relleno naranja para que sea la acción principal. */
+.modal__boton--siguiente {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-surface);
+}
+.modal__boton--siguiente:hover {
+  /* Un naranja un poco más oscuro al pasar el cursor. */
+  background: #e85a24;
+  border-color: #e85a24;
+  color: var(--color-surface);
+}
+
+/* En el último paso no hay "siguiente"; el botón principal es verde ("Terminar")
+   porque cierra el modal y da sensación de "completado". */
+.modal__boton--fin {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-surface);
+}
+.modal__boton--fin:hover {
+  background: #14795a;
+  border-color: #14795a;
+  color: var(--color-surface);
+}
+
+/* Responsivo: en celulares los botones del pie ocupan toda la fila, uno encima
+   del otro, para que sean fáciles de tocar. */
+@media (max-width: 640px) {
+  .modal {
+    padding: 20px 16px;
+  }
+  .modal__pie {
+    flex-direction: column-reverse;   /* "Siguiente" queda arriba (acción principal) */
+  }
+  .modal__boton {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+/* ============================================================================
+   15) MENÚ DE LA PORTADA  (los 4 botones grandes de index.html)
+
+   La portada ya no muestra pasos: solo pregunta "¿qué quieres ver?" con cuatro
+   botones grandes. Cada botón es un <a> (enlace normal) al que aquí le damos
+   aspecto de tarjeta grande y tocable.
+
+   Concepto clave: CSS GRID.
+   `display: grid` convierte al contenedor en una rejilla. Con
+   `grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))` le decimos:
+   "haz tantas columnas como quepan, cada una de mínimo 300px, y que se repartan
+   el espacio sobrante en partes iguales (1fr)". Resultado: en computadora salen
+   2 por fila; en celular, como no caben dos de 300px, se acomodan solos uno
+   debajo del otro. Sin media queries.
+   ---------------------------------------------------------------------------- */
+.menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 18px;                  /* separación entre botones (filas y columnas) */
+  margin-top: 24px;
+}
+
+/* Cada botón grande. Es una fila horizontal: [icono] [texto] [flecha].
+   `align-items: center` los alinea verticalmente al centro entre sí. */
+.menu__boton {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 20px;
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: 16px;
+  text-decoration: none;      /* quita el subrayado propio de los enlaces */
+  color: var(--color-text);
+
+  /* La barra de color a la izquierda identifica cada tipo de vale. El color
+     concreto lo pone cada modificador (--material, --renta, …) más abajo. */
+  border-left: 6px solid var(--color-primary);
+
+  /* transition = anima el cambio de estas propiedades en 0.15s en vez de
+     saltar de golpe. Hace que el hover se sienta suave. */
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+
+/* :hover = cómo se ve cuando el mouse está encima. Lo levantamos un poco y le
+   damos sombra: es la pista visual de "esto se puede tocar". */
+.menu__boton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* :focus-visible = cuando se navega con el teclado (tecla Tab). Marcamos el
+   botón para que quien no use mouse sepa dónde está parado. */
+.menu__boton:focus-visible {
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 3px;
+}
+
+/* El círculo del icono. flex-shrink: 0 evita que se aplaste cuando el texto
+   de al lado es largo. */
+.menu__icono {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--color-background);
+  font-size: 2rem;
+  color: var(--color-primary);
+}
+
+/* La columna del texto (título + descripción), uno debajo del otro.
+   flex: 1 hace que ocupe todo el espacio libre y empuje la flecha a la orilla.
+   min-width: 0 es un truco necesario en flexbox para que el texto largo pueda
+   cortarse en varias líneas en vez de desbordar la tarjeta. */
+.menu__texto {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu__titulo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-secondary);
+}
+
+.menu__desc {
+  font-size: 0.9rem;
+  color: var(--color-text-soft);
+  line-height: 1.4;
+}
+
+/* La flechita ">" de la derecha: solo invita al clic. */
+.menu__flecha {
+  flex-shrink: 0;
+  font-size: 1.8rem;
+  color: var(--color-text-soft);
+}
+
+/* --- Un color por tipo de vale -------------------------------------------
+   Cada modificador cambia SOLO la barra izquierda, el color del icono y el
+   borde al pasar el cursor. Así los cuatro botones se distinguen de un vistazo
+   sin tener que repetir todo el estilo. */
+.menu__boton--material {
+  border-left-color: var(--color-primary);      /* naranja */
+}
+.menu__boton--material .menu__icono {
+  color: var(--color-primary);
+}
+.menu__boton--material:hover {
+  border-color: var(--color-primary);
+}
+
+.menu__boton--renta {
+  border-left-color: var(--color-secondary);    /* azul */
+}
+.menu__boton--renta .menu__icono {
+  color: var(--color-secondary);
+}
+.menu__boton--renta:hover {
+  border-color: var(--color-secondary);
+}
+
+.menu__boton--pipa {
+  border-left-color: var(--color-accent);       /* verde */
+}
+.menu__boton--pipa .menu__icono {
+  color: var(--color-accent);
+}
+.menu__boton--pipa:hover {
+  border-color: var(--color-accent);
+}
+
+.menu__boton--asfaltico {
+  border-left-color: var(--color-text);         /* gris oscuro, como el asfalto */
+}
+.menu__boton--asfaltico .menu__icono {
+  color: var(--color-text);
+}
+.menu__boton--asfaltico:hover {
+  border-color: var(--color-text);
+}
+
+/* En celular achicamos un poco el icono y el título para que el botón no
+   ocupe media pantalla. */
+@media (max-width: 480px) {
+  .menu__boton {
+    padding: 18px 16px;
+    gap: 12px;
+  }
+  .menu__icono {
+    width: 48px;
+    height: 48px;
+    font-size: 1.6rem;
+  }
+  .menu__titulo {
+    font-size: 1.1rem;
+  }
+}
+
+
+/* ----------------------------------------------------------------------------
+   16) PARADA "PRÓXIMAMENTE" (en los mapas de material, asfáltico, etc.)
+
+   Una parada cuyo tutorial aún no existe. En el HTML es un <div> (no un <a>),
+   así que ya de por sí no se puede tocar; aquí solo la hacemos VERSE apagada
+   para que quede claro a simple vista.
+   ---------------------------------------------------------------------------- */
+.ruta__parada--proximamente {
+  opacity: 0.55;
+  cursor: default;
+}
+
+/* Le quitamos el efecto de "levantarse" al pasar el cursor: no es tocable,
+   así que no debe fingir que lo es. */
+.ruta__parada--proximamente:hover .ruta__contenido {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--color-border);
+}
+
+
+/* ----------------------------------------------------------------------------
+   17) LUPA (ver una imagen en grande)
+
+   Las imágenes de ejemplo (una remisión, una requisición…) se ven chiquitas
+   dentro del desplegable, y más aún si están adentro de un modal. La "lupa" es
+   una capa a pantalla completa que muestra esa misma imagen en grande.
+
+   Es GENÉRICA: sirve para cualquier imagen de cualquier página. Solo hace falta
+   marcar el disparador con data-ampliar="ruta/de/la/imagen.jpg" y que la página
+   incluya el <div class="lupa"> y js/lupa.js.
+   -------------------------------------------------------------------------- */
+
+/* Cualquier IMAGEN marcada con data-ampliar avisa con el cursor que se puede
+   tocar para verla en grande. Lo hacemos con un "selector de atributo"
+   (img[data-ampliar]) en vez de una clase: así funciona sola en cualquier
+   imagen ampliable, sin tener que acordarse de agregarle una clase extra. */
+img[data-ampliar] {
+  cursor: zoom-in;
+}
+
+/* Botón "Ampliar imagen" que acompaña a la foto. Es la versión visible y
+   tocable de lo mismo que hace el clic en la imagen: en celular no hay cursor,
+   así que nadie adivina que la foto se puede tocar. Se lo decimos con palabras. */
+.boton-ampliar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 8px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-secondary);
+  font-family: inherit;          /* los <button> no heredan la fuente solos */
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.boton-ampliar:hover {
+  background: var(--color-background);
+  border-color: var(--color-primary);
+}
+
+.boton-ampliar .mdi {
+  color: var(--color-primary);
+}
+
+/* El telón negro que cubre TODA la pantalla.
+   z-index 200: tiene que quedar POR ENCIMA del modal de pasos (que usa 100),
+   porque la imagen se amplía justamente desde dentro de ese modal. */
+.lupa {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  cursor: zoom-out;              /* avisa que tocando el fondo se cierra */
+}
+
+/* MISMO cuidado que con .modal-fondo: el display:flex de arriba le ganaría al
+   atributo `hidden` del HTML y la lupa se vería siempre. Hay que apagarla a
+   mano. */
+.lupa[hidden] {
+  display: none;
+}
+
+/* La imagen ampliada. max-width/max-height la hacen lo más grande posible SIN
+   salirse de la pantalla, y object-fit: contain evita que se deforme. */
+.lupa__img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  cursor: default;               /* sobre la imagen NO se cierra */
+}
+
+/* La "X" para cerrar, arriba a la derecha de la pantalla. */
+.lupa__cerrar {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  width: 44px;                   /* 44px es el mínimo cómodo para un dedo */
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.lupa__cerrar:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Pista de uso, abajo del todo. En móvil no se ve el cursor de "zoom-out", así
+   que conviene decirlo con palabras. */
+.lupa__pista {
+  position: absolute;
+  bottom: 18px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+}

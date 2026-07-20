@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<!--
+  guia-material.html — Guía del proceso de MATERIAL (FLETE).
+
+  Se llega aquí desde el botón "Material (Flete)" de la portada (index.html).
+  Muestra el camino del proceso completo: la parada 1 es del RESIDENTE y lleva a
+  una página aparte; las paradas del CHECADOR (2 a 6) son <button> que abren un
+  MODAL aquí mismo, sin salir de esta página (mismo patrón que
+  guia-renta-camion.html).
+
+  IMPORTANTE — los dos tipos de material:
+  En la app NO hay dos pantallas distintas. "Pétreo" (grava, arena, base) y
+  "Producto de corte" (tepetate, escombro) usan EL MISMO flujo; lo que cambia es
+  el material que se eligió al crear el vale. Por eso aquí hay UN solo camino, y
+  donde de verdad se separan lo marcamos con el chip "Solo pétreo" / "Solo corte"
+  (igual que ya hace la lección del residente con la Requisición).
+-->
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Material (Flete) — Ayuda Control de Acarreos</title>
+
+    <link rel="stylesheet" href="css/iconos.css" />
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+
+  <body>
+    <header class="encabezado">
+      <div class="contenedor">
+        <h1 class="encabezado__titulo">
+          <i class="mdi mdi-truck"></i> Material (Flete)
+        </h1>
+        <p class="encabezado__subtitulo">
+          Acarreo de material pagado por viaje
+        </p>
+      </div>
+    </header>
+
+    <main class="principal">
+      <div class="contenedor">
+        <a class="volver" href="index.html">
+          <i class="mdi mdi-arrow-left"></i> Volver al inicio
+        </a>
+
+        <div class="intro">
+          <h2 class="intro__titulo">
+            <i class="mdi mdi-map-marker-path"></i> El proceso de material
+          </h2>
+          <p>
+            Así fluye un flete de material de principio a fin. Toca cualquier
+            parada con <strong>flecha</strong> para ver su tutorial. Los pasos
+            del <strong>checador</strong> se abren aquí mismo, uno a la vez, y al
+            terminar vuelves a esta guía para el siguiente.
+          </p>
+          <p>
+            Este mismo camino sirve para los <strong>dos tipos</strong> de
+            material. Donde el proceso cambia lo verás marcado con
+            <span class="chip">Solo pétreo</span>
+            <span class="chip" style="background: var(--color-accent)"
+              >Solo corte</span
+            >
+          </p>
+        </div>
+
+        <h2 class="ruta-titulo">El proceso, paso a paso</h2>
+
+        <!-- EL CAMINO / MAPA DEL PROCESO ------------------------------------
+             Cada parada con tutorial es un <a> (página aparte) o un <button>
+             con data-paso (abre el modal). Los <div class="ruta__viaje"> y
+             <div class="ruta__ciclo"> son nodos ilustrativos: no son enlaces,
+             solo cuentan lo que pasa entre un paso y otro. -->
+        <div class="ruta">
+          <!-- PARADA 1 — Residente crea el vale de material.
+               Sigue siendo una PÁGINA aparte (no modal) porque es una lección
+               larga, de 6 pasos, y ya cubre pétreo y corte. -->
+          <a class="ruta__parada" href="ayuda-material-crear-vale.html">
+            <span class="ruta__num">1</span>
+            <span class="ruta__contenido">
+              <span class="ruta__rol">Residente</span>
+              <span class="ruta__parada-titulo">
+                <i class="mdi mdi-file-document-plus"></i> Crear el vale de
+                material
+              </span>
+              <span class="ruta__parada-texto">
+                El residente da de alta el vale con la obra, el material y el
+                origen. Es el punto de partida.
+              </span>
+              <span class="ruta__ir">
+                <i class="mdi mdi-play-circle"></i> Ver tutorial
+              </span>
+            </span>
+          </a>
+
+          <!-- PARADA 2 — Checador asigna el vehículo (QR) -->
+          <button type="button" class="ruta__parada" data-paso="asignar">
+            <span class="ruta__num ruta__num--checador">2</span>
+            <span class="ruta__contenido">
+              <span class="ruta__rol ruta__rol--checador">Checador</span>
+              <span class="ruta__parada-titulo">
+                <i class="mdi mdi-qrcode-scan"></i> Asignar el vehículo
+              </span>
+              <span class="ruta__parada-texto">
+                Escanea el QR del camión, confirma al operador y vincúlalo al
+                vale de material.
+              </span>
+              <span class="ruta__ir">
+                <i class="mdi mdi-play-circle"></i> Ver tutorial
+              </span>
+            </span>
+          </button>
+
+          <!-- PARADA 3 — Checador imprime el ticket -->
+          <button type="button" class="ruta__parada" data-paso="ticket">
+            <span class="ruta__num ruta__num--checador">3</span>
+            <span class="ruta__contenido">
+              <span class="ruta__rol ruta__rol--checador">Checador</span>
+              <span class="ruta__parada-titulo">
+                <i class="mdi mdi-printer"></i> Imprimir el ticket
+              </span>
+              <span class="ruta__parada-texto">
+                Sin ticket impreso no se puede registrar el viaje. El camión se
+                lo lleva al banco.
+              </span>
+              <span class="ruta__ir">
+                <i class="mdi mdi-play-circle"></i> Ver tutorial
+              </span>
+            </span>
+          </button>
+
+          <!-- NODO VIAJE — nodo ilustrativo, no es un enlace. Solo texto. -->
+          <div class="ruta__viaje">
+            <span class="ruta__num ruta__num--viaje">
+              <i class="mdi mdi-truck"></i>
+            </span>
+            <div class="ruta__viaje-contenido">
+              <div class="ruta__viaje-titulo">
+                <i class="mdi mdi-map-marker-distance"></i> El camión va al
+                banco… y regresa cargado
+              </div>
+              <p class="ruta__viaje-texto">
+                Con el ticket en mano, el camión sale al
+                <strong>banco de material</strong>, lo cargan y
+                <strong>regresa a la obra</strong> a descargar. Hasta que vuelve
+                no hay nada que registrar.
+              </p>
+            </div>
+          </div>
+
+          <!-- PARADA 4 — Checador registra el viaje.
+               Es la parada donde pétreo y corte de verdad se separan: por eso
+               el modal de este paso trae DOS bloques con su propio video. -->
+          <button type="button" class="ruta__parada" data-paso="registrar">
+            <span class="ruta__num ruta__num--checador">4</span>
+            <span class="ruta__contenido">
+              <span class="ruta__rol ruta__rol--checador">Checador</span>
+              <span class="ruta__parada-titulo">
+                <i class="mdi mdi-clipboard-check"></i> Registrar el viaje
+              </span>
+              <span class="ruta__parada-texto">
+                Aquí es donde <strong>pétreo y corte se capturan distinto</strong>.
+                Al final se toma la foto de evidencia.
+              </span>
+              <span class="ruta__ir">
+                <i class="mdi mdi-play-circle"></i> Ver tutorial
+              </span>
+            </span>
+          </button>
+
+          <!-- NODO CICLO — se repite hasta terminar la jornada.
+               Mismo armado que el nodo ciclo de guia-renta-camion.html, pero con
+               su PROPIA imagen: img/ciclo-renta.jpg es el diagrama de renta y
+               aquí el ciclo es otro (ticket → carga en el banco → viaje).
+               Le ponemos data-ampliar para que se pueda ver en grande con la
+               lupa (js/lupa.js), porque en celular un diagrama se lee mal. -->
+          <div class="ruta__ciclo">
+            <span class="ruta__num ruta__num--ciclo">
+              <i class="mdi mdi-refresh"></i>
+            </span>
+            <div class="ruta__ciclo-contenido">
+              <p>
+                <strong>Y se repite:</strong> imprimir el siguiente ticket → el
+                camión va por material → registrar el viaje… así en ciclo hasta
+                terminar la jornada. <strong>Tickets y viajes deben quedar
+                iguales</strong> para poder cerrar el vale.
+              </p>
+
+              <img
+                class="ruta__ciclo-img"
+                src="img/ciclo-material.jpg"
+                data-ampliar="img/ciclo-material.jpg"
+                alt="Ciclo de material: el checador imprime el ticket, el operador va al banco, lo cargan y entrega la remisión, el checador registra el viaje, y el ciclo se repite."
+              />
+
+              <button
+                type="button"
+                class="boton-ampliar"
+                data-ampliar="img/ciclo-material.jpg"
+                data-ampliar-alt="Diagrama del ciclo de material, ampliado"
+              >
+                <i class="mdi mdi-magnify-plus-outline"></i> Ampliar imagen
+              </button>
+            </div>
+          </div>
+
+          <!-- PARADA 5 — Cambiar el banco por viaje. SOLO en producto de corte.
+               La marcamos con el chip para que quien maneja pétreo sepa que
+               puede saltársela. -->
+          <button type="button" class="ruta__parada" data-paso="banco">
+            <span class="ruta__num ruta__num--checador">5</span>
+            <span class="ruta__contenido">
+              <span class="ruta__rol ruta__rol--checador">Checador</span>
+              <span class="chip" style="background: var(--color-accent)"
+                >Solo corte</span
+              >
+              <span class="ruta__parada-titulo">
+                <i class="mdi mdi-swap-horizontal"></i> Cambiar el banco de un
+                viaje
+              </span>
+              <span class="ruta__parada-texto">
+                En producto de corte cada viaje puede ir a un banco distinto. Se
+                elige al imprimir el ticket.
+              </span>
+              <span class="ruta__ir">
+                <i class="mdi mdi-play-circle"></i> Ver tutorial
+              </span>
+            </span>
+          </button>
+
+          <!-- PARADA 6 — Checador completa y cierra el vale -->
+          <button type="button" class="ruta__parada" data-paso="completar">
+            <span class="ruta__num ruta__num--checador">6</span>
+            <span class="ruta__contenido">
+              <span class="ruta__rol ruta__rol--checador">Checador</span>
+              <span class="ruta__parada-titulo">
+                <i class="mdi mdi-check-circle"></i> Completar y cerrar el vale
+              </span>
+              <span class="ruta__parada-texto">
+                Se cierra el vale, queda <strong>emitido</strong> y se genera el
+                PDF con su QR.
+              </span>
+              <span class="ruta__ir">
+                <i class="mdi mdi-play-circle"></i> Ver tutorial
+              </span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- ================= MODAL DE PASO (guía del checador) =================
+         Una sola ventana flotante que contiene los CINCO pasos del checador.
+         Empieza oculta (atributo `hidden`). El JavaScript de js/guia-modales.js
+         la muestra y deja visible solo el paso que tocaste (el que tenga la
+         clase .modal__paso--activo).
+
+         El id DEBE ser "modal-checador": es el que busca guia-modales.js con
+         getElementById. Manteniéndolo, el mismo JS funciona en esta página sin
+         cambiarle una sola línea.
+
+         Cada <article> lleva:
+           data-paso       = nombre del paso (coincide con el data-paso del botón)
+           data-siguiente  = a qué paso salta el botón "Siguiente" (el último no lo tiene)
+         Los <video> apuntan a archivos que aún no existen: se ven en negro hasta
+         que coloques las grabaciones con ese nombre en la carpeta videos/. -->
+    <div class="modal-fondo" id="modal-checador" hidden>
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-titulo-activo"
+      >
+        <!-- Botón "X" para cerrar (arriba a la derecha). -->
+        <button
+          type="button"
+          class="modal__cerrar"
+          data-cerrar
+          aria-label="Cerrar y volver a la guía"
+        >
+          &times;
+        </button>
+
+        <!-- ---------- PASO: ASIGNAR (Paso 2) ---------- -->
+        <article class="modal__paso" data-paso="asignar" data-siguiente="ticket">
+          <span class="modal__etiqueta">Paso 2 · Para checadores</span>
+          <h2 class="modal__titulo">
+            <i class="mdi mdi-qrcode-scan"></i> Asigna el vehículo al vale
+          </h2>
+          <div class="modal__cuerpo">
+            <div class="modal__texto">
+              <p class="paso__parrafo">
+                El residente ya creó el vale, pero nace
+                <strong>sin operador y sin camión</strong>. Asignarlos es lo
+                primero que hace el checador.
+              </p>
+              <ul class="paso__lista">
+                <li>
+                  En la pantalla <strong>Vales</strong>, toca
+                  <strong>“Asignar Vehículo”</strong>.
+                </li>
+                <li>
+                  <strong>Escanea el QR</strong> del camión. Con eso queda
+                  vinculado al vale (las placas van ligadas a ese QR).
+                </li>
+                <li>
+                  Revisa el <strong>“Operador en turno”</strong>. Si no es el
+                  correcto, toca <strong>“Cambiar”</strong> y búscalo.
+                </li>
+                <li>
+                  En la lista de vales, busca el tuyo dentro de
+                  <strong>“Flete de Material”</strong> y tócalo.
+                </li>
+                <li>Confirma con el botón <strong>“Asignar”</strong>.</li>
+              </ul>
+
+              <div class="nota nota--alerta">
+                <i class="mdi mdi-alert"></i>
+                <strong>Si el camión no aparece</strong> en la lista, casi
+                siempre es por el <strong>sindicato</strong>: debe coincidir con
+                el del vale (normalmente <strong>CTM</strong>; camión de
+                empresa/interno → <strong>Grupo GEEM</strong>).
+              </div>
+
+              <div class="nota">
+                <i class="mdi mdi-information"></i>
+                Al asignar, la app te lleva sola al detalle del vale en la
+                sección <strong>Acarreos</strong>. Ahí siguen los demás pasos.
+              </div>
+            </div>
+
+            <div class="telefono">
+              <div class="telefono__muesca"></div>
+              <video
+                class="telefono__video"
+                controls
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                src="videos/material-checador-paso-1.mp4"
+              ></video>
+              <p class="telefono__placeholder">Video: asignar vehículo (QR)</p>
+            </div>
+          </div>
+
+          <div class="modal__pie">
+            <button type="button" class="modal__boton" data-cerrar>
+              <i class="mdi mdi-arrow-left"></i> Volver a la guía
+            </button>
+            <button
+              type="button"
+              class="modal__boton modal__boton--siguiente"
+              data-siguiente
+            >
+              Siguiente paso <i class="mdi mdi-arrow-right"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- ---------- PASO: TICKET (Paso 3) ---------- -->
+        <article class="modal__paso" data-paso="ticket" data-siguiente="registrar">
+          <span class="modal__etiqueta">Paso 3 · Para checadores</span>
+          <h2 class="modal__titulo">
+            <i class="mdi mdi-printer"></i> Imprime el ticket antes del viaje
+          </h2>
+          <div class="modal__cuerpo">
+            <div class="modal__texto">
+              <p class="paso__parrafo">
+                El ticket es lo que el camión entrega en el banco para que lo
+                dejen cargar. <strong>Siempre va primero el ticket y después el
+                viaje.</strong>
+              </p>
+              <ul class="paso__lista">
+                <li>
+                  En el detalle del vale, en la sección
+                  <strong>“Tickets”</strong>, toca
+                  <strong>“Imprimir Primer Ticket”</strong> (después dirá
+                  <strong>“Imprimir Ticket #02”</strong>, y así).
+                </li>
+                <li>
+                  En <strong>“Ticket Físico”</strong>, toca
+                  <strong>“Buscar impresoras”</strong> e imprime por Bluetooth.
+                </li>
+                <li>Entrégale el ticket impreso al operador.</li>
+              </ul>
+
+              <div class="nota nota--alerta">
+                <i class="mdi mdi-alert"></i>
+                <strong>Sin ticket no hay viaje.</strong> Si intentas registrar
+                el viaje antes de imprimir, la app te avisa
+                <strong>“Ticket requerido”</strong> y no te deja seguir.
+              </div>
+
+              <div class="nota">
+                <i class="mdi mdi-file-document-outline"></i>
+                <span class="chip">Solo pétreo</span>
+                El ticket impreso incluye la línea
+                <strong>REQUISICION</strong> (el folio que capturó el residente).
+                En producto de corte esa línea no aparece, porque el corte no
+                lleva requisición.
+              </div>
+
+              <div class="nota">
+                <i class="mdi mdi-printer-check"></i>
+                Si la impresión sale mal, un ticket
+                <strong>solo se puede reimprimir una vez</strong>. Revisa que la
+                impresora tenga papel y batería antes de mandarlo.
+              </div>
+
+              <div class="nota">
+                <i class="mdi mdi-qrcode"></i>
+                El ticket lleva impreso un <strong>QR</strong>: quien lo escanee
+                puede ver el vale en la web,
+                <strong>sin necesidad de iniciar sesión</strong>.
+              </div>
+            </div>
+
+            <div class="telefono">
+              <div class="telefono__muesca"></div>
+              <video
+                class="telefono__video"
+                controls
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                src="videos/material-checador-paso-2.mp4"
+              ></video>
+              <p class="telefono__placeholder">Video: imprimir el ticket</p>
+            </div>
+          </div>
+
+          <div class="modal__pie">
+            <button type="button" class="modal__boton" data-cerrar>
+              <i class="mdi mdi-arrow-left"></i> Volver a la guía
+            </button>
+            <button
+              type="button"
+              class="modal__boton modal__boton--siguiente"
+              data-siguiente
+            >
+              Siguiente paso <i class="mdi mdi-arrow-right"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- ---------- PASO: REGISTRAR (Paso 4) ----------
+             Este paso es el único donde pétreo y corte se capturan distinto.
+             Por eso, en vez de un solo .modal__cuerpo, lleva DOS bloques
+             .modal__variante (uno por tipo), cada uno con su texto y su propio
+             video. La barra de color a la izquierda —naranja para pétreo,
+             verde para corte, los mismos colores de los chips— deja claro de un
+             vistazo dónde empieza y termina cada camino.
+             Al final vienen los avisos COMUNES a los dos tipos. -->
+        <article class="modal__paso" data-paso="registrar" data-siguiente="banco">
+          <span class="modal__etiqueta">Paso 4 · Para checadores</span>
+          <h2 class="modal__titulo">
+            <i class="mdi mdi-clipboard-check"></i> Registra el viaje al regresar
+          </h2>
+
+          <div class="modal__texto">
+            <p class="paso__parrafo">
+              Cuando el camión vuelve a la obra y descarga, abre el vale en
+              <strong>Acarreos</strong> y ve a la sección
+              <strong>“Viajes”</strong>. Lo que capturas ahí
+              <strong>depende del tipo de material</strong> del vale:
+            </p>
+
+            <div class="nota">
+              <i class="mdi mdi-gesture-tap-button"></i>
+              <strong>El botón se llama distinto según el viaje.</strong> La
+              primera vez dice <strong>“Registrar Primer Viaje”</strong>; de ahí
+              en adelante va contando: <strong>“Registrar Viaje 2”</strong>,
+              <strong>“Registrar Viaje 3”</strong>… Es el mismo botón, solo
+              cambia el número.
+            </div>
+          </div>
+
+          <!-- ---- Variante A: PÉTREO ----
+               El <div class="modal__variante"> agrupa la etiqueta, el texto y
+               el video de ESTE tipo de material, y le pinta una barra naranja a
+               la izquierda para que no se confunda con la variante de abajo. -->
+          <div class="modal__variante modal__variante--petreo">
+            <div class="modal__texto">
+              <p class="paso__parrafo">
+                <span class="chip">Solo pétreo</span>
+                Grava, arena, base… El material se pesa en báscula.
+              </p>
+            </div>
+            <div class="modal__cuerpo">
+              <div class="modal__texto">
+                <ul class="paso__lista">
+                  <li>
+                    Captura el <strong>“Peso del viaje”</strong> en
+                    <strong>toneladas</strong>, tal como viene en la báscula
+                    (por ejemplo <strong>14.2</strong>).
+                  </li>
+                  <li>
+                    Captura el <strong>“Folio de Remisión”</strong> (solo
+                    números). Es el folio del papel que da el banco.
+                  </li>
+                  <li>
+                    Toca el botón <strong>“Registrar Viaje”</strong> y confirma
+                    el aviso.
+                  </li>
+                </ul>
+
+                <div class="nota">
+                  <i class="mdi mdi-calculator"></i>
+                  Tú capturas <strong>toneladas</strong> y la app las convierte
+                  sola a <strong>m³</strong> usando el peso específico de ese
+                  material en ese banco. Por eso solo se te piden las toneladas.
+                </div>
+
+                <div class="nota nota--alerta">
+                  <i class="mdi mdi-alert"></i>
+                  Revisa bien el peso antes de confirmar:
+                  <strong>el viaje no se puede editar</strong>. Si te
+                  equivocaste, solo un residente puede eliminar el último viaje.
+                </div>
+
+                <!-- Desplegable <details>: se abre y cierra solo, sin JS. El
+                     navegador lo hace nativamente. Aquí mostramos una remisión
+                     real para que el checador sepa QUÉ papel está mirando y de
+                     dónde sacar el folio. Mismo patrón que el desplegable de la
+                     requisición en ayuda-material-crear-vale.html. -->
+                <details class="saber-mas">
+                  <summary class="saber-mas__boton">
+                    <i class="mdi mdi-help-circle-outline"></i> ¿Qué es la
+                    remisión y de dónde saco el folio?
+                  </summary>
+                  <div class="saber-mas__contenido">
+                    <p>
+                      La <strong>remisión</strong> es el papel que te entrega el
+                      <strong>banco de material</strong> cuando cargan el
+                      camión. Ahí viene el <strong>peso de la báscula</strong> y
+                      un <strong>folio</strong>: ese folio es el que capturas en
+                      la app, y es lo que después permite cuadrar lo que
+                      facturó el banco contra lo que registraste.
+                    </p>
+                    <p>
+                      Captura <strong>solo los números</strong> del folio, sin
+                      letras ni guiones. Así se ve una remisión real:
+                    </p>
+                    <!-- data-ampliar = "ábreme en grande". Lo lee js/lupa.js.
+                         Se lo ponemos a la imagen Y al botón de abajo: en
+                         escritorio se toca la foto, en celular es más claro el
+                         botón. Los dos hacen lo mismo. -->
+                    <img
+                      class="saber-mas__img"
+                      src="img/remision-ejemplo.jpg"
+                      data-ampliar="img/remision-ejemplo.jpg"
+                      alt="Ejemplo de una remisión de banco de material, con su folio y el peso de báscula"
+                    />
+
+                    <button
+                      type="button"
+                      class="boton-ampliar"
+                      data-ampliar="img/remision-ejemplo.jpg"
+                      data-ampliar-alt="Remisión ampliada: se ve el folio y el peso de báscula"
+                    >
+                      <i class="mdi mdi-magnify-plus-outline"></i> Ampliar
+                      imagen
+                    </button>
+                  </div>
+                </details>
+              </div>
+
+              <div class="telefono">
+                <div class="telefono__muesca"></div>
+                <video
+                  class="telefono__video"
+                  controls
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  src="videos/material-checador-paso-3-petreo.mp4"
+                ></video>
+                <p class="telefono__placeholder">
+                  Video: registrar viaje (pétreo)
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ---- Variante B: PRODUCTO DE CORTE ----
+               Mismo armado que la variante A, pero con la barra verde. -->
+          <div class="modal__variante modal__variante--corte">
+            <div class="modal__texto">
+              <p class="paso__parrafo">
+                <span class="chip" style="background: var(--color-accent)"
+                  >Solo corte</span
+                >
+                Tepetate, escombro, material de excavación… Aquí no hay báscula.
+              </p>
+            </div>
+            <div class="modal__cuerpo">
+              <div class="modal__texto">
+                <ul class="paso__lista">
+                  <li>
+                    La <strong>“Capacidad del viaje”</strong> en
+                    <strong>m³</strong> ya viene llena y
+                    <strong>no se puede editar</strong>: es la capacidad fija
+                    del camión que asignaste.
+                  </li>
+                  <li>
+                    <strong>No hay folio de remisión</strong> ni peso en
+                    toneladas: no se capturan.
+                  </li>
+                  <li>
+                    Toca el botón <strong>“Registrar Viaje”</strong> y confirma
+                    el aviso.
+                  </li>
+                </ul>
+
+                <div class="nota">
+                  <i class="mdi mdi-cube-outline"></i>
+                  Como el corte se cobra por <strong>volumen</strong> y no por
+                  peso, el m³ se toma directo del camión. Si el dato está mal,
+                  el problema es la
+                  <strong>capacidad registrada del vehículo</strong>, no el
+                  viaje: avísale al administrador.
+                </div>
+              </div>
+
+              <div class="telefono">
+                <div class="telefono__muesca"></div>
+                <video
+                  class="telefono__video"
+                  controls
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  src="videos/material-checador-paso-3-corte.mp4"
+                ></video>
+                <p class="telefono__placeholder">
+                  Video: registrar viaje (producto de corte)
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ---- Cierre común a los dos tipos ---- -->
+          <div class="modal__texto">
+            <div class="nota nota--alerta">
+              <i class="mdi mdi-camera"></i>
+              <strong>La foto es obligatoria en los dos casos.</strong> Al
+              confirmar el viaje se abre sola la pantalla
+              <strong>“Foto del Viaje”</strong>: toca
+              <strong>“Tomar foto del camión”</strong>, revisa que diga
+              <strong>“Dentro del radio”</strong> (la app compara tu ubicación
+              con la de la obra) y toca <strong>“Confirmar foto”</strong>. Sin
+              foto no puedes cerrar esa pantalla.
+            </div>
+
+            <div class="nota nota--alerta">
+              <i class="mdi mdi-clock-alert-outline"></i>
+              <strong>Espera entre viajes.</strong> Debe pasar un tiempo mínimo
+              (por defecto ~20 minutos) antes de poder registrar el siguiente. Si
+              lo intentas antes, la app te dice cuántos minutos faltan.
+            </div>
+
+            <div class="nota nota--alerta">
+              <i class="mdi mdi-calendar-remove"></i>
+              <strong>Vale fuera de jornada.</strong> La jornada va de las
+              <strong>8:00 AM a las 3:00 AM</strong> del día siguiente. Un vale
+              de una jornada anterior ya no acepta viajes: hay que usar uno de
+              hoy.
+            </div>
+
+            <div class="nota">
+              <i class="mdi mdi-wifi-off"></i>
+              <strong>Necesitas señal.</strong> La app no guarda viajes sin
+              internet. Si en la obra no hay cobertura, regístralo donde sí la
+              haya antes de que se acabe la jornada.
+            </div>
+          </div>
+
+          <div class="modal__pie">
+            <button type="button" class="modal__boton" data-cerrar>
+              <i class="mdi mdi-arrow-left"></i> Volver a la guía
+            </button>
+            <button
+              type="button"
+              class="modal__boton modal__boton--siguiente"
+              data-siguiente
+            >
+              Siguiente paso <i class="mdi mdi-arrow-right"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- ---------- PASO: BANCO (Paso 5) — solo producto de corte ---------- -->
+        <article class="modal__paso" data-paso="banco" data-siguiente="completar">
+          <span class="modal__etiqueta">Paso 5 · Para checadores</span>
+          <h2 class="modal__titulo">
+            <i class="mdi mdi-swap-horizontal"></i> Cambia el banco de un viaje
+          </h2>
+          <div class="modal__cuerpo">
+            <div class="modal__texto">
+              <p class="paso__parrafo">
+                <span class="chip" style="background: var(--color-accent)"
+                  >Solo corte</span
+                >
+                Un vale de <strong>pétreo</strong> va siempre al mismo banco y
+                este paso no le aparece. En <strong>producto de corte</strong>,
+                en cambio, cada viaje puede tirarse en un banco distinto.
+              </p>
+              <ul class="paso__lista">
+                <li>
+                  Con al menos un viaje ya registrado, toca
+                  <strong>“Imprimir Ticket #02”</strong>.
+                </li>
+                <li>
+                  La app pregunta <strong>“Banco de destino”</strong> y te dice a
+                  cuál fue el viaje anterior.
+                </li>
+                <li>
+                  Si va al mismo, toca <strong>“No, mismo banco”</strong> y
+                  sigue normal.
+                </li>
+                <li>
+                  Si cambia, toca <strong>“Sí, cambiar banco”</strong> y elige el
+                  nuevo de la lista. Cada banco muestra sus
+                  <strong>kilómetros</strong>, y el que se está usando lleva la
+                  etiqueta <strong>actual</strong>.
+                </li>
+              </ul>
+
+              <div class="nota nota--alerta">
+                <i class="mdi mdi-cash-sync"></i>
+                Al cambiar el banco <strong>se recalcula el costo</strong> del
+                viaje, porque la distancia es otra. Por eso importa elegir el
+                banco correcto: es lo que se va a cobrar.
+              </div>
+
+              <div class="nota">
+                <i class="mdi mdi-information"></i>
+                El cambio afecta <strong>solo a ese viaje</strong>, no a todo el
+                vale. Los viajes anteriores conservan su banco y su costo.
+              </div>
+
+              <div class="nota">
+                <i class="mdi mdi-map-marker-off"></i>
+                Si un banco <strong>no aparece</strong> en la lista es porque no
+                tiene distancia configurada hacia esa obra. Eso lo da de alta el
+                administrador.
+              </div>
+            </div>
+
+            <div class="telefono">
+              <div class="telefono__muesca"></div>
+              <video
+                class="telefono__video"
+                controls
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                src="videos/material-checador-paso-4-corte.mp4"
+              ></video>
+              <p class="telefono__placeholder">
+                Video: cambiar el banco de un viaje
+              </p>
+            </div>
+          </div>
+
+          <div class="modal__pie">
+            <button type="button" class="modal__boton" data-cerrar>
+              <i class="mdi mdi-arrow-left"></i> Volver a la guía
+            </button>
+            <button
+              type="button"
+              class="modal__boton modal__boton--siguiente"
+              data-siguiente
+            >
+              Siguiente paso <i class="mdi mdi-arrow-right"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- ---------- PASO: COMPLETAR (Paso 6) — último, sin "siguiente" ---------- -->
+        <article class="modal__paso" data-paso="completar">
+          <span class="modal__etiqueta">Paso 6 · Para checadores</span>
+          <h2 class="modal__titulo">
+            <i class="mdi mdi-check-circle"></i> Completa y cierra el vale
+          </h2>
+          <div class="modal__cuerpo">
+            <div class="modal__texto">
+              <p class="paso__parrafo">
+                Cuando ya no habrá más viajes, se cierra el vale. A partir de ahí
+                queda <strong>emitido</strong> y ya no admite cambios.
+              </p>
+              <ul class="paso__lista">
+                <li>
+                  En <strong>“Completar Vale”</strong>, agrega
+                  <strong>“Notas (opcional)”</strong> si hace falta (hasta 200
+                  caracteres).
+                </li>
+                <li>Toca el botón verde <strong>“Completar Vale”</strong>.</li>
+                <li>
+                  Verás <strong>“Vale Completado”</strong> con el resumen:
+                  <strong>viajes</strong>, <strong>volumen total</strong> y
+                  <strong>costo total</strong>.
+                </li>
+                <li>
+                  Toca <strong>“Generar PDF”</strong> y compártelo (WhatsApp,
+                  correo…).
+                </li>
+                <li>Al final, imprime el <strong>ticket físico</strong>.</li>
+              </ul>
+
+              <div class="nota nota--alerta">
+                <i class="mdi mdi-alert"></i>
+                <strong>Tickets y viajes deben coincidir.</strong> Si imprimiste
+                un ticket y no registraste su viaje, la app te avisa
+                <strong>“Viajes incompletos”</strong> y no deja cerrar. Registra
+                el viaje pendiente (o pide que borren ese ticket) y vuelve a
+                intentar.
+              </div>
+
+              <div class="nota">
+                <i class="mdi mdi-file-pdf-box"></i>
+                El PDF también <strong>solo se puede reimprimir una vez</strong>.
+                Antes de generarlo, asegúrate de tener a quién mandárselo.
+              </div>
+
+              <div class="nota">
+                <i class="mdi mdi-web"></i>
+                El <strong>QR</strong> del vale abre la página pública de
+                verificación: cualquiera puede confirmar que el vale es real,
+                ver los viajes y sus fotos,
+                <strong>sin iniciar sesión</strong>. Los precios sí quedan
+                ocultos.
+              </div>
+            </div>
+
+            <div class="telefono">
+              <div class="telefono__muesca"></div>
+              <video
+                class="telefono__video"
+                controls
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                src="videos/material-checador-paso-5.mp4"
+              ></video>
+              <p class="telefono__placeholder">
+                Video: completar el vale y generar el PDF
+              </p>
+            </div>
+          </div>
+
+          <div class="modal__pie">
+            <button type="button" class="modal__boton" data-cerrar>
+              <i class="mdi mdi-arrow-left"></i> Volver a la guía
+            </button>
+            <!-- Último paso: en vez de "siguiente", un botón verde que cierra. -->
+            <button type="button" class="modal__boton modal__boton--fin" data-cerrar>
+              <i class="mdi mdi-check"></i> ¡Listo! Terminar
+            </button>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- ================= LUPA (ver una imagen en grande) ==================
+         Capa negra a pantalla completa para ampliar cualquier imagen de
+         ejemplo. Empieza oculta; js/lupa.js le pone la foto y la muestra.
+         Va FUERA del modal a propósito: así puede taparlo por completo
+         (z-index 200 contra los 100 del modal). -->
+    <div class="lupa" id="lupa" hidden>
+      <button
+        type="button"
+        class="lupa__cerrar"
+        data-lupa-cerrar
+        aria-label="Cerrar la imagen ampliada"
+      >
+        &times;
+      </button>
+
+      <!-- El src empieza vacío: lo rellena el JS con la imagen que se pidió. -->
+      <img class="lupa__img" id="lupa-img" src="" alt="" />
+
+      <p class="lupa__pista">Toca fuera de la imagen o presiona Esc para cerrar</p>
+    </div>
+
+    <footer class="pie">
+      <div class="contenedor">Control de Acarreos · Centro de Ayuda</div>
+    </footer>
+
+    <!-- Lógica del modal: abrir al tocar un paso, cerrar, y "siguiente paso". -->
+    <script src="js/guia-modales.js" defer></script>
+
+    <!-- Lógica de la lupa. Va DESPUÉS de guia-modales.js: los dos escuchan la
+         tecla Escape, y así el candado de allá ya sabe si esta está abierta. -->
+    <script src="js/lupa.js" defer></script>
+  </body>
+</html>

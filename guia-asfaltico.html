@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--
+  guia-asfaltico.html — Guía del proceso de FLETE ASFÁLTICO.
+
+  Se llega aquí desde el botón "Flete Asfáltico" de la portada (index.html).
+
+  A diferencia de material y renta, este proceso tiene UNA SOLA parada: el
+  residente crea el vale y ahí mismo se captura todo (ticket de planta incluido).
+  No hay pasos del checador, así que esta guía no lleva modales ni paradas
+  "Próximamente".
+-->
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flete Asfáltico — Ayuda Control de Acarreos</title>
+
+    <link rel="stylesheet" href="css/iconos.css" />
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+
+  <body>
+    <header class="encabezado">
+      <div class="contenedor">
+        <h1 class="encabezado__titulo">
+          <i class="mdi mdi-road-variant"></i> Flete Asfáltico
+        </h1>
+        <p class="encabezado__subtitulo">
+          Acarreo de mezcla asfáltica, con su ticket de planta
+        </p>
+      </div>
+    </header>
+
+    <main class="principal">
+      <div class="contenedor">
+        <a class="volver" href="index.html">
+          <i class="mdi mdi-arrow-left"></i> Volver al inicio
+        </a>
+
+        <div class="intro">
+          <h2 class="intro__titulo">
+            <i class="mdi mdi-map-marker-path"></i> El proceso asfáltico
+          </h2>
+          <p>
+            El flete asfáltico es el proceso más corto: todo se resuelve en
+            <strong>un solo paso</strong>. Al crear el vale ya se capturan los
+            datos del ticket de la planta y el vale queda listo.
+          </p>
+        </div>
+
+        <h2 class="ruta-titulo">El proceso</h2>
+
+        <div class="ruta">
+          <!-- PARADA 1 — Residente crea el vale asfáltico (SÍ tiene tutorial) -->
+          <a class="ruta__parada" href="ayuda-asfaltico-crear-vale.html">
+            <span class="ruta__num">1</span>
+            <span class="ruta__contenido">
+              <span class="ruta__rol">Residente</span>
+              <span class="ruta__parada-titulo">
+                <i class="mdi mdi-file-document-plus"></i> Crear el vale
+                asfáltico
+              </span>
+              <span class="ruta__parada-texto">
+                El residente da de alta el vale con los datos del ticket de la
+                planta de asfalto. Aquí mismo queda todo: no hay pasos
+                posteriores del checador.
+              </span>
+              <span class="ruta__ir">
+                <i class="mdi mdi-play-circle"></i> Ver tutorial
+              </span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="pie">
+      <div class="contenedor">Control de Acarreos · Centro de Ayuda</div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+IMAGENES DEL TUTORIAL — como nombrarlas
+=======================================
+
+Guarda aqui las imagenes de ejemplo con EXACTAMENTE este nombre. En cuanto la
+pongas, aparece sola en la pagina (no hay que tocar el HTML):
+
+  requisicion-ejemplo.png  -> Captura de una requisicion de compra (la que
+                              mostraste: COEDESSA, folio 149-000288). Se muestra
+                              en el desplegable "Que es una requisicion?" del
+                              paso 5 de ayuda-material-crear-vale.html
+
+  remision-ejemplo.jpg     -> Foto de una REMISION real del banco de material
+                              (la que entregan al cargar el camion). Se muestra
+                              en el desplegable "Que es la remision y de donde
+                              saco el folio?" del paso 4 (Registrar el viaje,
+                              bloque PETREO) de guia-material.html.
+                              IMPORTANTE: que se lea bien el FOLIO y el peso de
+                              bascula, que es lo que el checador debe capturar.
+
+  ticket-asfaltico-ejemplo.jpg -> Imagen del ticket fisico impreso de un vale
+                              asfaltico. Se muestra en el desplegable "Ver la
+                              copia que se imprime" del paso 9 de
+                              ayuda-asfaltico-crear-vale.html
+
+  ciclo-material.jpg       -> Diagrama del "Ciclo de material", el equivalente al
+                              de renta pero para flete: checador imprime el
+                              ticket -> operador va al BANCO y lo CARGAN ahi ->
+                              entrega la remision al volver -> checador registra
+                              el viaje -> y se repite. Se muestra en el nodo
+                              "Y se repite" del mapa de guia-material.html.
+                              OJO: es un ciclo distinto al de renta (alla el
+                              camion va a DESCARGAR, aqui va a CARGAR), por eso
+                              lleva su propia imagen y no se reusa la de renta.
+
+  ciclo-renta.jpg          -> Diagrama del "Ciclo de renta" (checador registra e
+                              imprime ticket -> operador viaja al banco -> descarga
+                              y entrega ticket -> se repite). Se muestra en el
+                              nodo "El camion va al banco... y regresa" del mapa
+                              de la portada (index.html)
+
+Recomendaciones:
+- Formato .png o .jpg. Si usas .jpg, cambia tambien la extension en la etiqueta
+  <img> del HTML (busca "requisicion-ejemplo").
+- Que se lea el folio de la requisicion; el resto puede ir un poco comprimido
+  para que la pagina cargue rapido.
+
+Mientras no exista el archivo, en esa parte se vera el icono de imagen rota.

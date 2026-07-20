@@ -1,0 +1,96 @@
+VIDEOS DEL TUTORIAL — cómo nombrarlos
+=====================================
+
+Graba con el teléfono la pantalla de la app (video vertical) y guarda cada
+clip con EXACTAMENTE estos nombres. En cuanto los pongas aquí, aparecen solos
+en la página (no hay que tocar el HTML):
+
+RENTA (residente):
+  renta-paso-1.mp4   -> Elegir tipo "Renta"
+  renta-paso-2.mp4   -> Seleccionar la obra (la empresa se autocompleta)
+  renta-paso-3.mp4   -> Elegir material y sindicato
+  renta-paso-4.mp4   -> Poner fecha y hora de inicio
+  renta-paso-5.mp4   -> Turno nocturno (opcional) + botón "Crear Vale"
+
+RENTA - registrar viajes (checador):
+  renta-checador-paso-1.mp4 -> Asignar vehiculo: escanear QR, confirmar/"Cambiar"
+                               operador, elegir el vale en "Renta de Equipo" y "Asignar"
+  renta-checador-paso-2.mp4 -> Imprimir "Primer Ticket de Descarga": escribir el
+                               banco, confirmar material y imprimir en "Ticket Fisico"
+                               (solo aplica a material de descarga: basura, escombro...)
+  renta-checador-paso-3.mp4 -> Registrar viaje: boton "Registrar Primer Viaje" y
+                               confirmar el aviso (no pide mas datos)
+  renta-checador-paso-4.mp4 -> El ciclo: "Imprimir Ticket #02" y "Registrar Viaje 2"
+                               (opcional; muestra que se repite ticket -> viaje)
+  renta-checador-paso-5.mp4 -> Completar Vale: dia/medio dia u hora de fin, notas,
+                               evidencia (foto + ubicacion) y boton "Completar Vale"
+
+MATERIAL - petreo y de corte (residente):
+  material-paso-1.mp4  -> Elegir tipo "Material"
+  material-paso-2.mp4  -> Seleccionar obra (empresa autollena, presupuesto arriba)
+  material-paso-3.mp4  -> Elegir material y banco
+  material-paso-4.mp4  -> Elegir sindicato (la distancia se autollena)
+  material-paso-5.mp4  -> Capturar Requisicion CON UN MATERIAL PETREO
+                          (para que se vea aparecer el campo; el corte no lo tiene)
+  material-paso-6.mp4  -> Cantidad de vales + boton "Crear Vale"
+
+MATERIAL - registrar viajes (checador):
+  material-checador-paso-1.mp4 -> Asignar vehiculo: en Vales toca "Asignar
+                                  Vehiculo", escanea el QR del camion,
+                                  confirma o cambia el "Operador en turno",
+                                  elige tu vale dentro de "Flete de Material" y
+                                  toca "Asignar". Termina cuando la app te
+                                  lleva sola al detalle en Acarreos.
+  material-checador-paso-2.mp4 -> Imprimir el ticket. GRABALO CON UN VALE
+                                  PETREO, para que en el ticket se vea la linea
+                                  REQUISICION (en corte no aparece).
+                                  "Imprimir Primer Ticket" -> "Ticket Fisico"
+                                  -> "Buscar impresoras" -> imprimir Bluetooth.
+  material-checador-paso-3-petreo.mp4
+                               -> Registrar viaje PETREO: escribir "Peso del
+                                  viaje" en toneladas y el "Folio de Remision",
+                                  tocar "Registrar Primer Viaje" y confirmar.
+                                  Se abre sola la "Foto del Viaje": toma la
+                                  foto, que se alcance a ver el aviso de GPS
+                                  ("Dentro del radio") y "Confirmar foto".
+  material-checador-paso-3-corte.mp4
+                               -> Registrar viaje PRODUCTO DE CORTE: lo
+                                  importante es que se vea que la "Capacidad
+                                  del viaje" en m3 YA VIENE LLENA y NO SE PUEDE
+                                  EDITAR, y que NO hay folio de remision.
+                                  Luego "Registrar Primer Viaje", confirmar y
+                                  la foto de evidencia.
+  material-checador-paso-4-corte.mp4
+                               -> Cambiar el banco de un viaje (SOLO CORTE).
+                                  Con un viaje ya registrado, toca "Imprimir
+                                  Ticket #02": sale el aviso "Banco de
+                                  destino". Elige "Si, cambiar banco" y muestra
+                                  la lista con los KM de cada banco y la
+                                  etiqueta "actual"; elige otro y confirma.
+  material-checador-paso-5.mp4 -> Completar y cerrar: escribir las "Notas",
+                                  boton "Completar Vale", el resumen "Vale
+                                  Completado" (viajes / volumen / costo),
+                                  "Generar PDF", compartirlo y al final
+                                  imprimir el ticket fisico.
+
+ASFALTICO (residente):
+  asfaltico-paso-1.mp4 -> Elegir tipo "Asfalticos"
+  asfaltico-paso-2.mp4 -> Seleccionar obra (banco Planta de Asfaltos se fija solo)
+  asfaltico-paso-3.mp4 -> Elegir material asfaltico (la distancia se autollena)
+  asfaltico-paso-4.mp4 -> Elegir sindicato
+  asfaltico-paso-5.mp4 -> Escribir cantidad de material en m3
+  asfaltico-paso-6.mp4 -> Asignar vehiculo (QR o placas) + cambiar operador
+  asfaltico-paso-7.mp4 -> Notas (opcional) + boton "Crear Vale"
+  asfaltico-paso-8.mp4 -> Tomar foto de evidencia + compartir PDF por WhatsApp
+  asfaltico-paso-9.mp4 -> Imprimir el ticket fisico (2 copias) desde el modal
+                          "Ticket Fisico": para la 2a copia, "No, reintentar" e
+                          imprimir de nuevo; con las 2 listas, "Si, continuar"
+
+Recomendaciones:
+- Formato .mp4 (H.264). Es el que reproducen todos los navegadores y celulares.
+- Clips cortos (5 a 15 segundos cada uno) y comprimidos (pocos MB) para que la
+  página cargue rápido.
+- No importa que sean verticales: el marco de teléfono ya está pensado para eso.
+
+Si prefieres otro nombre o formato, avísame y ajusto las etiquetas <video> del
+archivo ayuda-renta-crear-vale.html.
