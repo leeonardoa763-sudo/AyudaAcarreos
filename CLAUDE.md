@@ -408,6 +408,33 @@ Además así lo que se abre en local con doble clic es idéntico a producción.
 
 ---
 
+## CONTRATO CON LA APP MÓVIL — no romper sin avisar
+
+Desde el 2026-08-03 la app (`appAcarreos`) enlaza a este sitio con botones de
+ayuda contextuales. Los enlaces viven en **`appAcarreos/src/config/ayuda.js`** —
+si algo de aquí se renombra, hay que actualizar ese archivo.
+
+Lo que la app da por hecho:
+
+1. **Los nombres de archivo** de `index.html`, las 3 `ayuda-*-crear-vale.html` y
+   las 4 `guia-*.html` (con `.html`, ver arriba).
+2. **Un paso del checador se puede abrir por URL** con
+   `guia-material.html#paso-registrar`. Lo resuelve `js/guia-modales.js` al
+   cargar (punto 7 de ese archivo): lee `location.hash`, y **solo abre el modal
+   si en esa página existe un `.modal__paso` con ese `data-paso`** — un hash que
+   no corresponde no hace nada. Al cerrar, el hash se limpia con
+   `history.replaceState`.
+3. **Los valores de `data-paso`**: `asignar`, `ticket`, `registrar`, `banco`,
+   `completar` en `guia-material.html`; los mismos menos `banco` en
+   `guia-renta-camion.html`. Renombrar uno deja el enlace de la app cayendo en
+   la guía sin abrir el paso (falla suave, pero falla). La app tiene esas listas
+   duplicadas en `PASOS_POR_GUIA` dentro de su `config/ayuda.js`.
+
+Al agregar un paso nuevo (o la primera lección de pipa), avisar para enlazarlo
+también desde la app.
+
+---
+
 ## ESTADO / ROADMAP
 
 - [x] Scaffold (index hub, css, js).
@@ -441,7 +468,9 @@ Además así lo que se abre en local con doble clic es idéntico a producción.
 - [ ] **Tutorial de la página web de verificación** (`web-acarreos.vercel.app`):
       cómo el sindicato concilia ahí con el PDF/QR. Hoy solo se menciona como
       nota en los 4 diagramas.
-- [ ] Enlazar el Centro de Ayuda desde la app móvil (`appAcarreos`).
+- [x] **Enlazar el Centro de Ayuda desde la app móvil** (`appAcarreos`, 2026-08-03):
+      fila "Ayuda" de Configuración a la portada, más botones contextuales que
+      abren la lección o el paso exacto. Ver "CONTRATO CON LA APP MÓVIL" arriba.
 - [ ] Pendiente menor: favicon + `<meta name="description">` (hoy al compartir el
       link por WhatsApp sale sin ícono ni descripción).
 - [ ] Tutoriales de **Renta de Pipa** (`guia-renta-pipa.html` está vacía a
